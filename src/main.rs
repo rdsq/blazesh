@@ -1,9 +1,6 @@
 use std::env;
 mod cli;
-
-fn format_code(exit_code: &i32) -> String {
-    format!("\x1b[31m[{}]\x1b[0m ", exit_code)
-}
+mod exit_codes;
 
 fn main() {
     let args = cli::parse_args();
@@ -14,7 +11,7 @@ fn main() {
 
     print!(
         "{}\x1b[36;1m{}\x1b[0m $ ",
-        if args.exit_code == 0 { "".to_string() } else { format_code(&args.exit_code) },
+        if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
         cwd,
     );
 }
