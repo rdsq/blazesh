@@ -2,7 +2,7 @@ use std::env;
 use std::process::exit;
 
 pub struct ParsedArgs {
-    pub exit_code: i32,
+    pub exit_code: i32, // some systems support exit codes outside `u8`
 }
 
 pub fn parse_args() -> ParsedArgs {
