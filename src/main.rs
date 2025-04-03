@@ -1,7 +1,7 @@
 use std::env;
 mod cli;
 
-fn format_code(exit_code: &u8) -> String {
+fn format_code(exit_code: &i32) -> String {
     format!("\x1b[31m[{}]\x1b[0m ", exit_code)
 }
 
