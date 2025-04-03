@@ -30,7 +30,7 @@ pub fn path_display(original_path: &str, depth: u8) -> String {
         path.pop();
         return format!(
             "{}/{}",
-            path_display(&path.to_str().unwrap(), depth - 1),
+            path_display(&path.to_string_lossy(), depth - 1),
             basename,
         );
     }
