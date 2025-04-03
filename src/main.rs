@@ -1,6 +1,7 @@
 use std::env;
 mod cli;
 mod exit_codes;
+mod path_display;
 
 fn main() {
     let args = cli::parse_args();
@@ -12,6 +13,6 @@ fn main() {
     print!(
         "{}%{{\x1b[36;1m%}}{}%{{\x1b[0m%}} $ ",
         if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
-        cwd,
+        path_display::path_display(&cwd),
     );
 }
