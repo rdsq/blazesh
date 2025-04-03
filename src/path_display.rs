@@ -22,16 +22,14 @@ pub fn path_display(original_path: &str, depth: u8) -> String {
             return "~".to_string();
         }
     }
-    // basic last dir
-    let basename = path_from_os_str(&path.file_name());
-    if depth == 1 {
-        format!(".../{}", basename)
-    } else {
-        path.pop();
-        return format!(
-            "{}/{}",
-            path_display(&path.to_string_lossy(), depth - 1),
-            basename,
-        );
+    if depth == 0 {
+        return "...".to_string();
     }
+    let basename = path_from_os_str(&path.file_name());
+    path.pop();
+    return format!(
+        "{}/{}",
+        path_display(&path.to_string_lossy(), depth - 1),
+        basename,
+    );
 }
