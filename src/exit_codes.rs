@@ -10,5 +10,5 @@ fn format_special(exit_code: &i32) -> String {
 }
 
 pub fn format_code(exit_code: &i32) -> String {
-    format!("\x1b[31m[{}]\x1b[0m ", format_special(exit_code))
+    format!("%{{\x1b[31m%}}[{}]%{{\x1b[0m%}} ", format_special(exit_code))
 }
