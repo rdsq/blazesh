@@ -20,6 +20,10 @@ pub fn parse_args() -> ParsedArgs {
         }
     } else {
         eprintln!("blazesh: not enough arguments");
-        exit(1);
+        // return synthetic default values anyway
+        ParsedArgs {
+            exit_code: 0,
+            jobs_number: "0".to_string(),
+        }
     }
 }
