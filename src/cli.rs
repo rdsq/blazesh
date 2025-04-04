@@ -1,29 +1,37 @@
 use std::env;
-use std::process::exit;
 
 pub struct ParsedArgs {
     pub exit_code: i32, // some systems support exit codes outside `u8`
     pub jobs_number: String,
 }
 
-pub fn parse_args() -> ParsedArgs {
-    let mut args = env::args();
-    if let (Some(code_str), Some(jobs_number)) = (args.nth(1), args.nth(2)) {
-        let exit_code = code_str.parse::<i32>()
-            .unwrap_or_else(|_err| {
-                eprintln!("blazesh: fialed to parse exit code argument");
-                exit(1);
-            });
-        ParsedArgs {
-            exit_code,
-            jobs_number,
+fn get_exit_code_arg(arg: Option<String>) -> i32 {
+    if let Some(code_str) = arg {
+        if let Ok(exit_code) = code_str.parse::<i32>() {
+            return exit_code;
+        } else {
+            eprintln!("blazesh: failed to parse exit code from \"{}\"", code_str);
         }
     } else {
-        eprintln!("blazesh: not enough arguments");
-        // return synthetic default values anyway
-        ParsedArgs {
-            exit_code: 0,
-            jobs_number: "0".to_string(),
-        }
+        eprintln!("blazesh: exit code argument not provided");
+    }
+    // synthetic default
+    0
+}
+
+fn get_jobs_arg(arg: Option<String>) -> String {
+    if let Some(jobs_number) = arg {
+        return jobs_number;
+    } else {
+        eprintln!("blazesh: jobs number argument not provided");
+    }
+    return "0".to_string();
+}
+
+pub fn parse_args() -> ParsedArgs {
+    let mut args = env::args();
+    ParsedArgs {
+        exit_code: get_exit_code_arg(args.nth(1)),
+        jobs_number: get_jobs_arg(args.nth(2)),
     }
 }
