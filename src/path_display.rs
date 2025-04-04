@@ -11,11 +11,11 @@ fn path_from_os_str(full_option: &Option<&OsStr>) -> String {
     "(somewhere broken)".to_string()
 }
 
-pub fn path_display(original_path: &str, depth: u8) -> String {
+fn path_display(original_path: &str, depth: u8, is_first: bool) -> String {
     let mut path = PathBuf::from(original_path);
     if path.parent().is_none() {
         // root dir `/`
-        return "/".to_string();
+        return if is_first { "/".to_string() } else { "".to_string() };
     }
     if let Some(home) = env::var_os("HOME") {
         if Path::new(&home) == path.as_path() {
@@ -29,7 +29,11 @@ pub fn path_display(original_path: &str, depth: u8) -> String {
     path.pop();
     return format!(
         "{}/{}",
-        path_display(&path.to_string_lossy(), depth - 1),
+        path_display(&path.to_string_lossy(), depth - 1, false),
         basename,
     );
+}
+
+pub fn path_display_wrapper(original_path: &str) -> String {
+    path_display(original_path, 2, true)
 }

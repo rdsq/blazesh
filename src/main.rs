@@ -17,8 +17,7 @@ fn main() {
     print!(
         "{}%{{\x1b[36;1m%}}{}%{{\x1b[0m%}} {}$ ",
         if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
-        path_display::path_display(&cwd, 2),
+        path_display::path_display_wrapper(&cwd),
         git_status,
     );
-    // show_git_status::update_git_status(&cached_git_status);
 }
