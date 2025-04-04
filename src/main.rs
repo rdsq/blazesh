@@ -5,6 +5,7 @@ mod path_display;
 mod git_status;
 mod esc;
 mod show_git_status;
+mod jobs;
 
 fn main() {
     let args = cli::parse_args();
@@ -15,9 +16,10 @@ fn main() {
 
     let git_status = show_git_status::show_git_status();
     print!(
-        "{}%{{\x1b[36;1m%}}{}%{{\x1b[0m%}} {}$ ",
+        "{}%{{\x1b[36;1m%}}{}%{{\x1b[0m%}} {}{}$ ",
         if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
         path_display::path_display_wrapper(&cwd),
+        jobs::show_jobs(&args.jobs_number),
         git_status,
     );
 }
