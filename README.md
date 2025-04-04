@@ -50,3 +50,5 @@ And it also shows the number of background jobs, if it is not `0` like this:
 ## Configuration
 
 If you want to disable git checking, like for speed, you can set the `BLAZESH_DISABLE_GIT` environment variable. You can set it to anything really. It doesn't check
+
+You can change the color of the path in the prompt by modifying the `BLAZESH_ACCENT_COLOR` environment variable. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan)
