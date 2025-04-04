@@ -19,15 +19,19 @@ fn construct_one_icon(symbol: &str, condition: &bool) -> String {
 
 pub fn get_updated_git_status() -> String {
     if let Some(status) = git_status() {
-        let brackets_color = if status.uncommitted || status.upstream || status.downstream { "34;1" } else { "2;1" };
-        format!(
-            "{}{}{}{}{} ",
-            color(&brackets_color, "["),
-            construct_one_icon("+", &status.uncommitted),
-            construct_one_icon("↑", &status.upstream),
-            construct_one_icon("↓", &status.downstream),
-            color(&brackets_color, "]"),
-        )
+        let any_status = status.uncommitted || status.upstream || status.downstream;
+        if any_status {
+            format!(
+                "{}{}{}{}{} ",
+                color("34;1", "["),
+                construct_one_icon("+", &status.uncommitted),
+                construct_one_icon("↑", &status.upstream),
+                construct_one_icon("↓", &status.downstream),
+                color("34;1", "]"),
+            )
+        } else {
+            color("2;1", "[git]")
+        }
     } else {
         String::new()
     }
