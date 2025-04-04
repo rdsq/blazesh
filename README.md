@@ -41,4 +41,6 @@ And the git panel, yes it kind of takes time to load, but it is helpful
 - `↑` represents unpushed changes
 - `↓` represents unpulled chnages
 
-And it also shows the number of background jobs, if it is not `0`
+And it also shows the number of background jobs, if it is not `0` like this:
+
+![Blazesh showing the jobs number in brackets as 1 after running `sleep 5` on background](./media/jobs.jpg)
