@@ -4,6 +4,8 @@ It is a custom prompt theme for Zsh made in Rust
 
 ![Blazesh demo](./media/demo.jpg)
 
+It was created to be minimal, compact, beautiful, smart (compared to a potato), and just a fun experiment
+
 ## Installation
 
 Simply clone it somewhere using `git`
