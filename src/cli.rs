@@ -1,5 +1,6 @@
 use std::env;
 
+#[derive(Debug)]
 pub struct ParsedArgs {
     pub exit_code: i32, // some systems support exit codes outside `u8`
     pub jobs_number: String,
@@ -30,8 +31,9 @@ fn get_jobs_arg(arg: Option<String>) -> String {
 
 pub fn parse_args() -> ParsedArgs {
     let mut args = env::args();
+    args.next();
     ParsedArgs {
-        exit_code: get_exit_code_arg(args.nth(1)),
-        jobs_number: get_jobs_arg(args.nth(2)),
+        exit_code: get_exit_code_arg(args.next()),
+        jobs_number: get_jobs_arg(args.next()),
     }
 }
