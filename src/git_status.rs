@@ -1,5 +1,6 @@
 use std::process::Command;
 
+#[derive(Debug)]
 pub struct GitStatus {
     pub uncommitted: bool,
     pub upstream: bool,

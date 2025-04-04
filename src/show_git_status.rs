@@ -1,18 +1,12 @@
-use std::env;
 use crate::git_status::git_status;
 use crate::esc::color;
+use crate::store_cache;
 
-const CACHED_VAR_NAME: &str = "_BLAZESH_CACHED_GIT";
+const CACHED_FILE_NAME: &str = "blazesh-git-cache.txt";
 
 pub fn show_git_status() -> String {
-    if let Some(env_var) = env::var_os(CACHED_VAR_NAME) {
-        return env_var
-            .to_str()
-            .unwrap_or("")
-            .to_string();
-    } else {
-        String::new()
-    }
+    return store_cache::load_cache(CACHED_FILE_NAME)
+        .unwrap_or("".to_string());
 }
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
@@ -42,8 +36,6 @@ pub fn get_updated_git_status() -> String {
 pub fn update_git_status(cached: &str) {
     let updated = get_updated_git_status();
     if updated != cached {
-        unsafe {
-            env::set_var(CACHED_VAR_NAME, updated);
-        }
+        store_cache::save_cache(CACHED_FILE_NAME, &updated);
     }
 }
