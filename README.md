@@ -44,3 +44,7 @@ And the git panel, yes it kind of takes time to load, but it is helpful
 And it also shows the number of background jobs, if it is not `0` like this:
 
 ![Blazesh showing the jobs number in brackets as 1 after running `sleep 5` on background](./media/jobs.jpg)
+
+## Configuration
+
+If you want to disable git checking, like for speed, you can set the `BLAZESH_DISABLE_GIT` environment variable. You can set it to anything really. It doesn't check

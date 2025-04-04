@@ -1,5 +1,6 @@
 use crate::git_status::git_status;
 use crate::esc::color;
+use std::env;
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
     if *condition {
@@ -30,5 +31,9 @@ pub fn get_updated_git_status() -> String {
 }
 
 pub fn show_git_status() -> String {
-    get_updated_git_status()
+    if env::var_os("BLAZESH_DISABLE_GIT").is_none() {
+        return get_updated_git_status();
+    } else {
+        return "".to_string();
+    }
 }
