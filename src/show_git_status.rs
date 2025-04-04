@@ -4,7 +4,7 @@ use crate::store_cache;
 
 const CACHED_FILE_NAME: &str = "blazesh-git-cache.txt";
 
-pub fn show_git_status() -> String {
+pub fn get_cached_git_status() -> String {
     return store_cache::load_cache(CACHED_FILE_NAME)
         .unwrap_or("".to_string());
 }
@@ -35,6 +35,10 @@ pub fn get_updated_git_status() -> String {
     } else {
         String::new()
     }
+}
+
+pub fn show_git_status() -> String {
+    get_updated_git_status()
 }
 
 pub fn update_git_status(cached: &str) {
