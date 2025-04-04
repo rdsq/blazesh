@@ -1,13 +1,5 @@
 use crate::git_status::git_status;
 use crate::esc::color;
-use crate::store_cache;
-
-const CACHED_FILE_NAME: &str = "blazesh-git-cache.txt";
-
-pub fn get_cached_git_status() -> String {
-    return store_cache::load_cache(CACHED_FILE_NAME)
-        .unwrap_or("".to_string());
-}
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
     if *condition {
@@ -39,11 +31,4 @@ pub fn get_updated_git_status() -> String {
 
 pub fn show_git_status() -> String {
     get_updated_git_status()
-}
-
-pub fn update_git_status(cached: &str) {
-    let updated = get_updated_git_status();
-    if updated != cached {
-        store_cache::save_cache(CACHED_FILE_NAME, &updated);
-    }
 }

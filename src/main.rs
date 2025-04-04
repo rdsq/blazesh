@@ -4,7 +4,6 @@ mod exit_codes;
 mod path_display;
 mod git_status;
 mod esc;
-mod store_cache;
 mod show_git_status;
 
 fn main() {
