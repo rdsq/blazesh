@@ -30,7 +30,7 @@ pub fn get_updated_git_status() -> String {
                 color("34;1", "]"),
             )
         } else {
-            color("2;1", "[git]")
+            format!("{} ", color("2;1", "[git]"))
         }
     } else {
         String::new()
