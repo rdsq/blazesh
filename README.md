@@ -74,7 +74,7 @@ You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR
     - `0 1 2 3 4 5 6 7` - full ANSI rainbow
     - `FF0000 FF7F00 FFFF00 00FF00 00FFFF 0000FF 8B00FF` - actual rainbow 🌈
 
-**But** it also has the second mode:: **gradient**
+**But** it also has the second mode: **gradient**
 
 You can set a gradient between any two RGB values by following the `gradient [color1] [color2]` syntax
 
