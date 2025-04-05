@@ -34,6 +34,19 @@ fn path_display(original_path: &str, depth: u8, is_first: bool) -> String {
     );
 }
 
+fn get_depth() -> u8 {
+    if let Some(depth_var) = std::env::var_os("BLAZESH_PATH_DEPTH") {
+        if let Some(depth_str) = depth_var.to_str() {
+            if let Ok(depth) = depth_str.parse::<u8>() {
+                return depth;
+            } else {
+                eprintln!("blazesh: invalid BLAZESH_PATH_DEPTH value: {}", depth_str);
+            }
+        }
+    }
+    2
+}
+
 pub fn path_display_wrapper(original_path: &str) -> String {
-    path_display(original_path, 2, true)
+    path_display(original_path, get_depth(), true)
 }

@@ -65,3 +65,5 @@ Here is how you can configure Blazesh with environment variables:
     - `4 3` - 🇺🇦
     - `4 4 4 4 3 3 3 3` - same as the previous one, but more readable
     - `0 1 2 3 4 5 6 7` - full ANSI rainbow
+
+- `BLAZESH_PATH_DEPTH` - how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
