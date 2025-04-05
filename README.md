@@ -80,6 +80,8 @@ You can set a gradient between any two RGB values by following the `gradient [co
 
 For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 0057B7 FFD700` to see the gradient between the official 🇺🇦 colors
 
+![Really long path showing a gradient from blue to yellow](./media/gradient.jpg)
+
 ### Path
 
 Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
