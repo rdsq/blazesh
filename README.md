@@ -67,3 +67,14 @@ Here is how you can configure Blazesh with environment variables:
     - `0 1 2 3 4 5 6 7` - full ANSI rainbow
 
 - `BLAZESH_PATH_DEPTH` - how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
+
+## Insanity
+
+*You have the fredom to make your command prompt look insane if you are*
+
+![Command prompt showing path of ~/mydir/another/one/so/many/dirs/im/insane/i/mean/imnot/im/just/showingwhat/aninsaneperson/woulddo in full and repeating ANSI rainbow](./media/insanity.jpg)
+
+```sh
+export BLAZESH_ACCENT_COLOR='0 1 2 3 4 5 6 7'
+export BLAZESH_PATH_DEPTH=255
+```
