@@ -1,5 +1,5 @@
-_BLAZESH_DIR="${0:A:h}"
-_BLAZESH_BIN_PATH="$_BLAZESH_DIR/target/release/blazesh"
+export _BLAZESH_DIR="${0:A:h}"
+export _BLAZESH_BIN_PATH="$_BLAZESH_DIR/target/release/blazesh"
 
 if [ -f "$_BLAZESH_BIN_PATH" ]; then
     precmd() {

@@ -7,6 +7,7 @@ mod jobs;
 mod accent_color;
 mod git;
 mod format_colors;
+mod dir_representation;
 
 fn main() {
     let args = cli::parse_args();

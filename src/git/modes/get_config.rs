@@ -1,4 +1,5 @@
 use std::env;
+use crate::dir_representation::get_blazesh_dir_representation;
 
 pub enum Mode {
     Unoptimized,
@@ -31,6 +32,7 @@ pub fn get_mode() -> Mode {
         // default
         _ => {
             eprintln!("blazesh: unknown value of the BLAZESH_GIT_MODE variable: {}", conf);
+            eprintln!("Check {}/README.md#Configuration for more info", get_blazesh_dir_representation());
             return Mode::Optimized;
         },
     }
