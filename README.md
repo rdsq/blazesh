@@ -89,3 +89,5 @@ You can put this to your `.zshrc` or wherever you store your configs and get a n
 ansi_colors=(0 1 2 3 4 5 6 7)
 export BLAZESH_ACCENT_COLOR=$(printf "%s\n" "${ansi_colors[@]}" | shuf -n 1)
 ```
+
+And you can do that with so much more, like days of the week, hours, whatever you wish
