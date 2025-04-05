@@ -41,7 +41,7 @@ And the git panel, yes it kind of takes time to load, but it is helpful
 
 - `+` represents the uncommitted changes
 - `↑` represents unpushed changes
-- `↓` represents unpulled chnages
+- `↓` represents unpulled changes
 
 And it also shows the number of background jobs if it is not `0` like this:
 
