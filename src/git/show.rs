@@ -1,4 +1,4 @@
-use crate::git_status::git_status;
+use crate::git::status::git_status;
 use crate::esc::color;
 use std::env;
 

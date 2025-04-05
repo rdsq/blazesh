@@ -2,11 +2,10 @@ use std::env;
 mod cli;
 mod exit_codes;
 mod path_display;
-mod git_status;
 mod esc;
-mod show_git_status;
 mod jobs;
 mod accent_color;
+mod git;
 
 fn main() {
     let args = cli::parse_args();
@@ -15,7 +14,7 @@ fn main() {
         .map(|path| path.display().to_string())
         .unwrap_or_else(|_| "unknown".to_string());
 
-    let git_status = show_git_status::show_git_status();
+    let git_status = git::show::show_git_status();
     print!(
         "{}%{{\x1b[3{};1m%}}{}%{{\x1b[0m%}} {}{}",
         if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
