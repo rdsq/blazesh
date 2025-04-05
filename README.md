@@ -49,6 +49,14 @@ And it also shows the number of background jobs, if it is not `0` like this:
 
 ## Configuration
 
-If you want to disable git checking, like for speed, you can set the `BLAZESH_DISABLE_GIT` environment variable. You can set it to anything really. It doesn't check
+Here is how you can configure Blazesh with environment variables:
 
-You can change the color of the path in the prompt by modifying the `BLAZESH_ACCENT_COLOR` environment variable. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan)
+- `BLAZESH_GIT_MODE` - configure how it handles git. Possible values:
+    - `unoptimized` - check git status every time, even if it is not a git repository
+    - `optimized` (default) - check git status only if the current directory or one of its parents is a git repository. **Best for functionality**
+    - `optimized-cwd` - like `optimized`, but checks only the current directory, doesn't check its parents
+    - `static` - just show `[git]` if the current directory or one of its parents is a git repository. Does not check any status or anything. **Best for performance balance**
+    - `static-cwd` - like `static`, but checks only the current directory
+    - `disabled` - completely disable git integration
+
+- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan)

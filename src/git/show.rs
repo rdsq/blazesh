@@ -1,6 +1,6 @@
 use crate::git::status::git_status;
 use crate::esc::color;
-use std::env;
+use crate::git::modes::decide::{decide, Decision};
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
     if *condition {
@@ -8,6 +8,10 @@ fn construct_one_icon(symbol: &str, condition: &bool) -> String {
     } else {
         color("2;1", symbol)
     }
+}
+
+fn static_git_status() -> String {
+    format!("{} ", color("2;1", "[git]"))
 }
 
 pub fn get_updated_git_status() -> String {
@@ -23,7 +27,7 @@ pub fn get_updated_git_status() -> String {
                 color("34;1", "]"),
             )
         } else {
-            format!("{} ", color("2;1", "[git]"))
+            static_git_status()
         }
     } else {
         String::new()
@@ -31,9 +35,9 @@ pub fn get_updated_git_status() -> String {
 }
 
 pub fn show_git_status() -> String {
-    if env::var_os("BLAZESH_DISABLE_GIT").is_none() {
-        return get_updated_git_status();
-    } else {
-        return "".to_string();
+    return match decide() {
+        Decision::Status => get_updated_git_status(),
+        Decision::Static => static_git_status(),
+        Decision::Nothing => "".to_string(),
     }
 }
