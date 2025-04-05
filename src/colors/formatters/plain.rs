@@ -68,7 +68,7 @@ fn verify_and_extract(chunk: &str) -> Option<char> {
 }
 
 impl PlainFormatter {
-    pub fn new(conf: &str) -> Self {
+    pub fn from_conf(conf: &str) -> Self {
         let mut res: Vec<char> = Vec::new();
         let sp = conf.split_whitespace();
         for chunk in sp {
