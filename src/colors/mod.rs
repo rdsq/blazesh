@@ -1,3 +1,3 @@
 pub mod esc;
-pub mod format_colors;
-pub mod accent_color;
+pub mod formatters;
+pub mod get_config;
