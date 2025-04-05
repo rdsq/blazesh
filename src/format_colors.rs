@@ -16,12 +16,20 @@ pub fn format_colors(colors: &Vec<char>, text: &str) -> String {
     }
     let mut variation = 0;
     let mut res = String::new();
+    let mut prev: &char = &' '; // anything
     for ch in text.chars() {
-        res.push_str(&format!(
-            "{}{}",
-            esc(&format!("3{}m", &colors[variation])),
-            ch,
-        ));
+        let col = &colors[variation];
+        if col != prev {
+            // optimize the number of escape sequences for repeating colors
+            res.push_str(&format!(
+                "{}{}",
+                esc(&format!("3{}m", col)),
+                ch,
+            ));
+        } else {
+            res.push(ch); // just the char
+        }
+        prev = col;
         variation = variation + 1;
         if variation > (num_items - 1) {
             variation = 0; // reset
