@@ -71,7 +71,7 @@ Here is how you can configure Blazesh with environment variables:
 
 *And yes, you can use non 🦅🦅🦅🦅🦅🦅 spelling*
 
-## Example configurationa
+## Example configurations
 
 ### Insanity
 
