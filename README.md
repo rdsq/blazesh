@@ -68,7 +68,9 @@ Here is how you can configure Blazesh with environment variables:
 
 - `BLAZESH_PATH_DEPTH` - how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
 
-## Insanity
+## Example configurationa
+
+### Insanity
 
 *You have the fredom to make your command prompt look insane if you are*
 
@@ -77,4 +79,13 @@ Here is how you can configure Blazesh with environment variables:
 ```sh
 export BLAZESH_ACCENT_COLOR='0 1 2 3 4 5 6 7'
 export BLAZESH_PATH_DEPTH=255
+```
+
+### Random color every session
+
+You can put this to your `.zshrc` or wherever you store your configs and get a new accent color every time you open the shell
+
+```sh
+ansi_colors=(0 1 2 3 4 5 6 7)
+export BLAZESH_ACCENT_COLOR=$(printf "%s\n" "${ansi_colors[@]}" | shuf -n 1)
 ```
