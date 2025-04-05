@@ -51,15 +51,22 @@ And it also shows the number of background jobs if it is not `0` like this:
 
 Here is how you can configure Blazesh with environment variables:
 
-- `BLAZESH_GIT_MODE` - configure how it handles git. Possible values:
-    - `unoptimized` - check git status every time, even if it is not a git repository
-    - `optimized` (default) - check git status only if the current directory or one of its parents is a git repository. **Best for functionality**
-    - `optimized-cwd` - like `optimized`, but checks only the current directory, doesn't check its parents
-    - `static` - just show `[git]` if the current directory or one of its parents is a git repository. Does not check any status or anything. **Best for performance balance**
-    - `static-cwd` - like `static`, but checks only the current directory
-    - `disabled` - completely disable git integration
+### Git mode
 
-- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes, and also any RGB HEX value. The default is `FF9900` (orange). You can also set it to a sequence of colors, and it will show them as repeating colors. **Examples:**
+You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environment variable. **Possible values:**
+
+- `unoptimized` - check git status every time, even if it is not a git repository
+- `optimized` (default) - check git status only if the current directory or one of its parents is a git repository. **Best for functionality**
+- `optimized-cwd` - like `optimized`, but checks only the current directory, doesn't check its parents
+- `static` - just show `[git]` if the current directory or one of its parents is a git repository. Does not check any status or anything. **Best for performance balance**
+- `static-cwd` - like `static`, but checks only the current directory
+- `disabled` - completely disable git integration
+
+*And yes, you can use non 🦅🦅🦅🦅🦅🦅 spelling*
+
+### Colors
+
+You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR`. You can set it to any number 0-7 and 9 representing the ANSI color codes, and also any RGB HEX value. The default is `FF9900` (orange). You can also set it to a sequence of colors, and it will show them as repeating colors. **Examples:**
     - `5` - magenta
     - `9` - default color (usually white or black)
     - `4 3` - 🇺🇦
@@ -67,9 +74,21 @@ Here is how you can configure Blazesh with environment variables:
     - `0 1 2 3 4 5 6 7` - full ANSI rainbow
     - `FF0000 FF7F00 FFFF00 00FF00 00FFFF 0000FF 8B00FF` - actual rainbow 🌈
 
-- `BLAZESH_PATH_DEPTH` - how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
+**But** it also has the second mode:: **gradient**
 
-*And yes, you can use non 🦅🦅🦅🦅🦅🦅 spelling*
+You can set a gradient between any two RGB values by following the `gradient [color1] [color2]` syntax
+
+For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 0057B7 FFD700` to see the gradient between the official 🇺🇦 colors
+
+### Path
+
+Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
+
+**Examples with values and how it displays the path**:
+
+- `0` - `...`
+- `1` - `.../src`
+- `2` *(and higher)* - `~/blazesh/src`
 
 ## Example configurations
 
