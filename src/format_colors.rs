@@ -19,7 +19,7 @@ pub fn format_colors(colors: &Vec<char>, text: &str) -> String {
     let mut prev: &char = &' '; // anything
     for ch in text.chars() {
         let col = &colors[variation];
-        if *col != *prev {
+        if col !=   prev {
             // optimize the number of escape sequences for repeating colors
             res.push_str(&format!(
                 "{}{}",
