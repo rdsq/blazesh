@@ -15,11 +15,11 @@ fn main() {
         .unwrap_or_else(|_| "unknown".to_string());
 
     let git_status = git::show::show_git_status();
+    let formatter = colors::get_config::get_formatter();
     print!(
         "{}{} {}{}",
         if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
-        format!("{}{}", colors::esc::esc_sequence("1m"), colors::formatters::plain::format_colors(
-            &colors::get_config::get_accent_color(),
+        format!("{}{}", colors::esc::esc_sequence("1m"), formatter.format_str(
             &path_display::path_display_wrapper(&cwd),
         )),
         jobs::show_jobs(&args.jobs_number),
