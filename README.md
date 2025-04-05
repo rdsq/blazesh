@@ -43,7 +43,7 @@ And the git panel, yes it kind of takes time to load, but it is helpful
 - `↑` represents unpushed changes
 - `↓` represents unpulled chnages
 
-And it also shows the number of background jobs, if it is not `0` like this:
+And it also shows the number of background jobs if it is not `0` like this:
 
 ![Blazesh showing the jobs number in brackets as 1 after running `sleep 5` on background](./media/jobs.jpg)
 
@@ -59,4 +59,4 @@ Here is how you can configure Blazesh with environment variables:
     - `static-cwd` - like `static`, but checks only the current directory
     - `disabled` - completely disable git integration
 
-- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan). You can also set it to a sequence of colors, and it will show them as repeating colors. Try `4 3` or `4 4 4 3 3 3` fir longer sequences with better readability
+- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan). You can also set it to a sequence of colors, and it will show them as repeating colors. Try `4 3` or `4 4 4 3 3 3` for longer sequences with better readability
