@@ -63,5 +63,5 @@ Here is how you can configure Blazesh with environment variables:
     - `5` - magenta
     - `9` - default color (usually white or black)
     - `4 3` - 🇺🇦
-    - `4 4 4 4 3 3 3 3` - same as the previous one, but more readabld
+    - `4 4 4 4 3 3 3 3` - same as the previous one, but more readable
     - `0 1 2 3 4 5 6 7` - full ANSI rainbow
