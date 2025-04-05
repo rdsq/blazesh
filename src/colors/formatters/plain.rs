@@ -98,7 +98,7 @@ impl PlainFormatter {
             }
         }
         if res.is_empty() {
-            res.push(Color::Ansi('6')); // default
+            res.push(Color::Rgb(RGB::try_parse("FF9900").unwrap())); // default
         }
         Self { colors: res }
     }
