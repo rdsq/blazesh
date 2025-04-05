@@ -1,8 +1,24 @@
 use crate::colors::esc::esc_sequence as esc;
 use crate::colors::formatters::formatter_trait::Formatter;
+use crate::colors::rgb::RGB;
+
+#[derive(PartialEq)]
+enum Color {
+    Ansi(char),
+    Rgb(RGB),
+}
+
+impl Color {
+    pub fn to_esc(&self) -> String {
+        return match self {
+            Color::Ansi(c) => esc(&format!("3{}m", c)),
+            Color::Rgb(rgb) => esc(&rgb.to_ansi_foreground()),
+        };
+    }
+}
 
 pub struct PlainFormatter {
-    colors: Vec<char>,
+    colors: Vec<Color>,
 }
 
 impl Formatter for PlainFormatter {
@@ -15,21 +31,21 @@ impl Formatter for PlainFormatter {
             // do not waste any stuff
             return format!(
                 "{}{}{}",
-                esc(&format!("3{}m", self.colors[0])),
+                self.colors[0].to_esc(),
                 text,
                 esc("0m"),
             );
         }
         let mut variation = 0;
         let mut res = String::new();
-        let mut prev: &char = &' '; // anything
+        let mut prev: &Color = &Color::Ansi(' '); // anything
         for ch in text.chars() {
             let col = &self.colors[variation];
-            if col !=   prev {
+            if col != prev {
                 // optimize the number of escape sequences for repeating colors
                 res.push_str(&format!(
                     "{}{}",
-                    esc(&format!("3{}m", col)),
+                    col.to_esc(),
                     ch,
                 ));
             } else {
@@ -47,7 +63,10 @@ impl Formatter for PlainFormatter {
 }
 
 // for getting the data
-fn verify_and_extract(chunk: &str) -> Option<char> {
+fn verify_and_extract(chunk: &str) -> Option<Color> {
+    if let Some(parsed_rgb) = RGB::try_parse(&chunk) {
+        return Some(Color::Rgb(parsed_rgb));
+    }
     if chunk.len() == 1 {
         let v = chunk
             .chars().nth(0).unwrap();
@@ -61,7 +80,7 @@ fn verify_and_extract(chunk: &str) -> Option<char> {
         || v == '6'
         || v == '7'
         || v == '9' {
-            return Some(v);
+            return Some(Color::Ansi(v));
         }
     }
     None
@@ -69,7 +88,7 @@ fn verify_and_extract(chunk: &str) -> Option<char> {
 
 impl PlainFormatter {
     pub fn from_conf(conf: &str) -> Self {
-        let mut res: Vec<char> = Vec::new();
+        let mut res: Vec<Color> = Vec::new();
         let sp = conf.split_whitespace();
         for chunk in sp {
             if let Some(ch) = verify_and_extract(chunk) {
@@ -79,7 +98,7 @@ impl PlainFormatter {
             }
         }
         if res.is_empty() {
-            res.push('6'); // default
+            res.push(Color::Ansi('6')); // default
         }
         Self { colors: res }
     }
