@@ -1,4 +1,4 @@
-use crate::esc::esc_sequence as esc;
+use crate::colors::esc::esc_sequence as esc;
 
 pub fn format_colors(colors: &Vec<char>, text: &str) -> String {
     let num_items = colors.len();

@@ -1,5 +1,5 @@
 use crate::git::status::git_status;
-use crate::esc::color;
+use crate::colors::esc::color;
 use crate::git::modes::decide::{decide, Decision};
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
