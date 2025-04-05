@@ -32,6 +32,7 @@ pub fn get_accent_color() -> Vec<char> {
                     eprintln!("blazesh: invalid color code at BLAZESH_ACCENT_COLOR: {}", chunk);
                 }
             }
+            return res;
         }
     }
     vec!['6']
