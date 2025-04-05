@@ -5,8 +5,13 @@ fn format_special(exit_code: &i32) -> String {
         130 => "130/SIGINT".to_string(),
         137 => "137/SIGKILL".to_string(),
         143 => "143/SIGTERM".to_string(),
-        n => n.to_string(),
-    }.to_string();
+        n => {
+            if *n < 0 || *n > 255 {
+                return format!("{}/fancyy", n);
+            }
+            return n.to_string();
+        },
+    };
 }
 
 pub fn format_code(exit_code: &i32) -> String {
