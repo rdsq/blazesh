@@ -59,4 +59,4 @@ Here is how you can configure Blazesh with environment variables:
     - `static-cwd` - like `static`, but checks only the current directory
     - `disabled` - completely disable git integration
 
-- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan)
+- `BLAZESH_ACCENT_COLOR` - set the color of the path in the prompt. You can set it to any number 0-7 and 9 representing the ANSI color codes. The default is `6` (cyan). You can also set it to a sequence of colors, and it will show them as repeating colors. Try `4 3` or `4 4 3 3` fir longer sequences
