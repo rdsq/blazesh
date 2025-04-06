@@ -1,6 +1,6 @@
 # Blazesh
 
-It is a custom prompt theme for Zsh made in Rust
+It is a custom shell prompt theme made in Rust
 
 ![Blazesh demo](./media/demo.jpg)
 
@@ -14,18 +14,19 @@ Simply clone it somewhere using `git`
 git clone https://github.com/rdsq/blazesh
 ```
 
-Then add this line to `.zshrc`
+Then add this line to `.zshrc` or `.bashrc`
 
 ```zsh
 # Replace `~/blazesh` with your path
-source ~/blazesh/prompt.zsh
+source ~/blazesh/blazesh.sh
 ```
 
 And don't forget to compile it using `cargo build --release`. So the full script to install it:
 
 ```sh
 git clone https://github.com/rdsq/blazesh ~/blazesh
-echo "source ~/blazesh/prompt.zsh" >> ~/.zshrc
+echo "source ~/blazesh/blazesh.sh" >> ~/.zshrc
+echo "source ~/blazesh/blazesh.sh" >> ~/.bashrc
 cd ~/blazesh
 cargo build --release
 cd -
@@ -107,7 +108,7 @@ export BLAZESH_PATH_DEPTH=255
 
 ### Random color every session
 
-You can put this to your `.zshrc` or wherever you store your configs and get a new accent color every time you open the shell
+You can put this to your `.bashrc`/`.zshrc` or wherever you store your configs and get a new accent color every time you open the shell
 
 ```sh
 ansi_colors=(0 1 2 3 4 5 6 7)

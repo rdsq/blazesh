@@ -1,4 +1,11 @@
-export _BLAZESH_DIR="${0:A:h}"
+if [ -n "$BASH_VERSION" ]; then
+    export _BLAZESH_DIR="$(dirname "${BASH_SOURCE[0]}")"
+elif [ -n "$ZSH_VERSION" ]; then
+    export _BLAZESH_DIR="${0:A:h}"
+else
+    echo "blazesh: unknown shell" >&2
+    return 1
+fi
 export _BLAZESH_BIN_PATH="$_BLAZESH_DIR/target/release/blazesh"
 
 if [ -f "$_BLAZESH_BIN_PATH" ]; then
