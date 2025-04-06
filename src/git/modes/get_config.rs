@@ -11,13 +11,11 @@ pub enum Mode {
 }
 
 pub fn get_mode() -> Mode {
-    let conf_possible = env::var_os("BLAZESH_GIT_MODE");
+    let conf_possible = env::var("BLAZESH_GIT_MODE").ok();
     if conf_possible.is_none() {
         return Mode::Optimized; // default
     }
-    let conf_some = conf_possible.unwrap();
-    let conf = conf_some.to_str()
-        .unwrap_or("");
+    let conf: &str = &conf_possible.unwrap();
     return match conf {
         "unoptimized" => Mode::Unoptimized,
         "optimized" => Mode::Optimized,

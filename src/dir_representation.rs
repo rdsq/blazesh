@@ -1,8 +1,9 @@
 pub fn get_blazesh_dir_representation() -> String {
-    if let Some(blazesh_dir_os) = std::env::var_os("_BLAZESH_DIR") {
-        if let Ok(blazesh_dir) = blazesh_dir_os.into_string() {
-            return blazesh_dir;
-        }
+    if let Ok(blazesh_dir) = std::env::var("_BLAZESH_DIR") {
+        return blazesh_dir;
+    } else {
+        // not accurate, but it doesn't have to be 100% accurate
+        // it's just a representation for the user
+        return "blazesh".to_string();
     }
-    return "blazesh".to_string(); // not accurate, but it doesn't have to be 100% accurate
 }

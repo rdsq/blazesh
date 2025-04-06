@@ -17,7 +17,7 @@ fn path_display(original_path: &str, depth: u8, is_first: bool) -> String {
         // root dir `/`
         return if is_first { "/".to_string() } else { "".to_string() };
     }
-    if let Some(home) = env::var_os("HOME") {
+    if let Ok(home) = env::var("HOME") {
         if Path::new(&home) == path.as_path() {
             return "~".to_string();
         }
@@ -35,16 +35,14 @@ fn path_display(original_path: &str, depth: u8, is_first: bool) -> String {
 }
 
 fn get_depth() -> u8 {
-    if let Some(depth_var) = std::env::var_os("BLAZESH_PATH_DEPTH") {
-        if let Some(depth_str) = depth_var.to_str() {
-            if let Ok(depth) = depth_str.parse::<u8>() {
-                return depth;
-            } else {
-                eprintln!("blazesh: invalid BLAZESH_PATH_DEPTH value: {}", depth_str);
-            }
+    if let Ok(depth_str) = std::env::var("BLAZESH_PATH_DEPTH") {
+        if let Ok(depth) = depth_str.parse::<u8>() {
+            return depth;
+        } else {
+            eprintln!("blazesh: invalid BLAZESH_PATH_DEPTH value: {}", depth_str);
         }
     }
-    2
+    2 // default
 }
 
 pub fn path_display_wrapper(original_path: &str) -> String {
