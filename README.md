@@ -115,4 +115,10 @@ ansi_colors=(0 1 2 3 4 5 6 7)
 export BLAZESH_ACCENT_COLOR=$(printf "%s\n" "${ansi_colors[@]}" | shuf -n 1)
 ```
 
-And you can do that with so much more, like days of the week, hours, whatever you wish
+And you can do that with so much more, like days of the week, hours, whatever you wish!
+
+## Problems
+
+The most obvious one: **synchronous git**. Unfortunately I am not smart enough to figure out how to do that asynchronously, so... Well it's not *that* bad. Even on my 🥔 it runs fast enough to be usable daily
+
+Not so critical one, but also worth mentioning: **exit codes** don't show up in **Bash**. As far as I can tell, this issue cannot be fixed, it's just how Bash works
