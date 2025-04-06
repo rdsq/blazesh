@@ -18,6 +18,8 @@ pub static WRAP_SEQ: Lazy<fn(&str) -> String> = Lazy::new(|| {
         wrap_bash
     } else if sh == Some("zsh".to_string()) {
         wrap_zsh
+    } else if sh == Some("fish".to_string()) {
+        wrap_unknown
     } else {
         eprintln!("blazesh: unknown shell");
         wrap_unknown
