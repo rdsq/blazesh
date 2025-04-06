@@ -21,8 +21,12 @@ fi
 
 if [ -f "$_BLAZESH_BIN_PATH" ]; then
     if [ -n "$BASH_VERSION" ]; then
-        PROMPT_COMMAND="$PROMPT_COMMAND; _blazesh_construct_prompt"
-    elif [ -n "$ZSH_VERSION"]; then
+        if [ -n "$PROMPT_COMMAND" ]; then
+            PROMPT_COMMAND="$PROMPT_COMMAND; _blazesh_construct_prompt"
+        else
+            PROMPT_COMMAND="_blazesh_construct_prompt"
+        fi
+    elif [ -n "$ZSH_VERSION" ]; then
         precmd() {
             _blazesh_construct_prompt
         }
