@@ -1,7 +1,9 @@
 if [ -n "$BASH_VERSION" ]; then
     export _BLAZESH_DIR="$(dirname "${BASH_SOURCE[0]}")"
+    export _BLAZESH_SHELL=bash
 elif [ -n "$ZSH_VERSION" ]; then
     export _BLAZESH_DIR="${0:A:h}"
+    export _BLAZESH_SHELL=zsh
 else
     echo "blazesh: unknown shell" >&2
     return 1

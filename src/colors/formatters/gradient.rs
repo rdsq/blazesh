@@ -1,4 +1,5 @@
-use crate::colors::esc::{esc_sequence, wrap_seq};
+use crate::colors::esc::esc_sequence;
+use crate::colors::wrap::WRAP_SEQ;
 use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
 
@@ -15,7 +16,7 @@ impl Formatter for GradientFormatter {
             let t = i as f32 / num_items as f32;
             let color = self.start.lerp(&self.end, t);
             result.push_str(
-                &format!("{}{}", wrap_seq(&color.to_ansi_foreground()), ch)
+                &format!("{}{}", WRAP_SEQ(&color.to_ansi_foreground()), ch)
             )
         }
         result.push_str(&esc_sequence("0m"));

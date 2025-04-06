@@ -1,4 +1,5 @@
-use crate::colors::esc::{esc_sequence as esc, wrap_seq};
+use crate::colors::esc::esc_sequence as esc;
+use crate::colors::wrap::WRAP_SEQ;
 use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
 
@@ -12,7 +13,7 @@ impl Color {
     pub fn to_esc(&self) -> String {
         return match self {
             Color::Ansi(c) => esc(&format!("3{}m", c)),
-            Color::Rgb(rgb) => wrap_seq(&rgb.to_ansi_foreground()),
+            Color::Rgb(rgb) => WRAP_SEQ(&rgb.to_ansi_foreground()),
         };
     }
 }

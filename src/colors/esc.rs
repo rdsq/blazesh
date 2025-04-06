@@ -1,9 +1,7 @@
-pub fn wrap_seq(sequence: &str) -> String {
-    format!("%{{{}%}}", sequence)
-}
+use crate::colors::wrap::WRAP_SEQ;
 
 pub fn esc_sequence(sequence: &str) -> String {
-    wrap_seq(&format!("\x1b[{}", sequence))
+    WRAP_SEQ(&format!("\x1b[{}", sequence))
 }
 
 pub fn color(code: &str, text: &str) -> String {
