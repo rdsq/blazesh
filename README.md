@@ -138,6 +138,6 @@ And you can do that with so much more, like days of the week, hours, whatever yo
 
 ## Problems
 
-The most obvious one: **synchronous git**. Unfortunately I am not smart enough to figure out how to do that asynchronously, so... Well it's not *that* bad. Even on my 🥔 it runs fast enough to be usable daily
+The most obvious one: **synchronous git**. Unfortunately I am not smart enough to figure out how to do that asynchronously, so... Well it's not *that* bad. Even on my 🥔 it runs fast enough to be usable daily. But I mean it's still better than nothing. Fish, for example, does it synchronously too, but with less features. At least here it can be disabled or customized
 
 Not so critical one, but also worth mentioning: **exit codes** don't show up in **Bash**. As far as I can tell, this issue cannot be fixed, it's just how Bash works
