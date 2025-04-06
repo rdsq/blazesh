@@ -115,6 +115,27 @@ ansi_colors=(0 1 2 3 4 5 6 7)
 export BLAZESH_ACCENT_COLOR=$(printf "%s\n" "${ansi_colors[@]}" | shuf -n 1)
 ```
 
+Or random RGB color:
+
+```sh
+export BLAZESH_ACCENT_COLOR="$(printf '#%06X\n' $((RANDOM * RANDOM % 16777216)))"
+```
+
+Or random gradient:
+
+```sh
+#!/bin/bash
+
+# Generate 12 random hex cluster
+random_hex=$(xxd -p -l 6 /dev/urandom)
+
+# Split in two
+color1="#${random_hex:0:6}"
+color2="#${random_hex:6:6}"
+
+export BLAZESH_ACCENT_COLOR="gradient $color1 $color2"
+```
+
 And you can do that with so much more, like days of the week, hours, whatever you wish!
 
 ## Problems
