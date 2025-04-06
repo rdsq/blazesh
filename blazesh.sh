@@ -27,9 +27,7 @@ if [ -f "$_BLAZESH_BIN_PATH" ]; then
             PROMPT_COMMAND="_blazesh_construct_prompt"
         fi
     elif [ -n "$ZSH_VERSION" ]; then
-        precmd() {
-            _blazesh_construct_prompt
-        }
+        precmd_functions+=(_blazesh_construct_prompt)
     fi
 else
     echo "blazesh: could not find the binary. You can compile it by using this command:" >&2
