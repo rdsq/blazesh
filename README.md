@@ -124,8 +124,6 @@ export BLAZESH_ACCENT_COLOR="$(printf '#%06X\n' $((RANDOM * RANDOM % 16777216)))
 Or random gradient:
 
 ```sh
-#!/bin/bash
-
 # Generate 12 random hex cluster
 random_hex=$(xxd -p -l 6 /dev/urandom)
 
