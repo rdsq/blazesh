@@ -144,4 +144,4 @@ Not so critical one, but also worth mentioning: **exit codes** don't show up in 
 
 ## Fish shell
 
-Yeah it also supports Fish, I don't know why I did this, but it was easy. I am too lazy to rewrite all the documentation, *if you count it as such*, to include Fish, but it is kind of different from other shells, just figure it out on your own. The file is `blazesh.fish`. Just source it in your `~/.config/fish/config.fish` or, again, wherever you store your configs
+Yeah it also supports Fish, I don't know why I did this, but it was easy. I am too lazy to rewrite all the documentation, *if you count it as such*, to include Fish, since it is kind of different from other shells, just figure it out on your own. The file is `blazesh.fish`. Just source it in your `~/.config/fish/config.fish` or, again, wherever you store your configs
