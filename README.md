@@ -10,8 +10,8 @@ It was created to be minimal, compact, beautiful, smart (compared to a potato), 
 
 There might be a few "why" questions related to this project
 
-1. **Why Rust?** Because it is easier. I know, it is a complied language, but it is so much easier to implement complex features than in shell scripts. And just because why not
-2. **Why Blazesh?** As a reference to the fact that everything written in Rust is blazingly fast. It's not the primary goal, if you want the fastest experiene, just run `PS1='$ '` in your shell. It just sounds good
+1. **Why Rust?** Because it is easier. I know, it is a complied language, but it is so much easier to implement complex features than in shell scripts, it doesn't have to run a thousand commands to do something simple. And just because why not
+2. **Why Blazesh?** As a reference to the fact that everything written in Rust is blazingly fast. It's not the primary goal, if you want the fastest experiene, just run `PS1='$ '` in your shell. I just like how Blazesh sounds
 3. **Why (in general)?** To create something that would be the closest to my ideal prompt. Also to be a fun project
 
 ## Installation
@@ -44,7 +44,7 @@ cd -
 
 The prompt shows a clean path, if it is too long it is cut
 
-It also shows the error exit codes, some of them with special messages
+It also shows the error exit codes, some of them with special messages *(doesn't work on Bash)*
 
 And the git panel, yes it kind of takes time to load, but it is helpful
 
