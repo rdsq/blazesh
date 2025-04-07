@@ -1,6 +1,5 @@
 use crate::colors::esc::esc_sequence as esc;
 use super::formatter_trait::Formatter;
-use crate::colors::rgb::RGB;
 use crate::colors::terminal_color::TerminalColor;
 
 pub struct PlainFormatter {
@@ -49,7 +48,7 @@ impl Formatter for PlainFormatter {
 }
 
 impl PlainFormatter {
-    pub fn from_conf(conf: &str) -> Self {
+    pub fn from_conf(conf: &str) -> Option<Self> {
         let mut res: Vec<TerminalColor> = Vec::new();
         let sp = conf.split_whitespace();
         for chunk in sp {
@@ -60,8 +59,8 @@ impl PlainFormatter {
             }
         }
         if res.is_empty() {
-            res.push(TerminalColor::Rgb(RGB::try_parse("FF9900").unwrap())); // default
+            return None;
         }
-        Self { colors: res }
+        Some(Self { colors: res })
     }
 }

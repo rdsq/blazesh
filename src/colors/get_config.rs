@@ -1,5 +1,5 @@
 use std::env;
-use super::formatters::{formatter_trait, plain, gradient};
+use super::{formatters::{formatter_trait, gradient, plain}, rgb::RGB};
 
 pub fn get_formatter() -> Box<dyn formatter_trait::Formatter> {
     if let Ok(custom) = env::var("BLAZESH_ACCENT_COLOR") {
@@ -9,8 +9,13 @@ pub fn get_formatter() -> Box<dyn formatter_trait::Formatter> {
                 // if it fails go to default
             }
         }
-        return Box::new(plain::PlainFormatter::from_conf(&custom));
+        if let Some(plain_formatter) = plain::PlainFormatter::from_conf(&custom) {
+            return Box::new(plain_formatter);
+        }
     }
     // default
-    Box::new(plain::PlainFormatter::from_conf(""))
+    Box::new(gradient::GradientFormatter {
+        start: RGB { r: 255, g: 153, b: 0 }, // FF9900
+        end:   RGB { r: 255, g: 255, b: 0 }, // FFFF00
+    })
 }

@@ -4,8 +4,8 @@ use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
 
 pub struct GradientFormatter {
-    start: RGB,
-    end: RGB,
+    pub start: RGB,
+    pub end: RGB,
 }
 
 impl Formatter for GradientFormatter {

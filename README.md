@@ -75,7 +75,7 @@ You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environm
 
 ### Colors
 
-You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR`. You can set it to any number 0-7 and 9 representing the ANSI color codes, and also any RGB HEX value. The default is `FF9900` (orange). You can also set it to a sequence of colors, and it will show them as repeating colors. **Examples:**
+You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR`. You can set it to any number 0-7 and 9 representing the ANSI color codes, and also any RGB HEX value. You can also set it to a sequence of colors, and it will show them as repeating colors. **Examples:**
     - `5` - magenta
     - `9` - default color (usually white or black)
     - `4 3` - 🇺🇦
@@ -90,6 +90,8 @@ You can set a gradient between any two RGB values by following the `gradient [co
 For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 0057B7 FFD700` to see the gradient between the official 🇺🇦 colors
 
 ![Really long path showing a gradient from blue to yellow](./media/gradient.jpg)
+
+And the default color is a gradient too! It is `gradient FF9900 FFFF00`
 
 ### Path
 
