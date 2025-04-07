@@ -1,25 +1,10 @@
 use crate::colors::esc::esc_sequence as esc;
-use crate::colors::wrap::WRAP_SEQ;
 use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
-
-#[derive(PartialEq)]
-enum Color {
-    Ansi(char),
-    Rgb(RGB),
-}
-
-impl Color {
-    pub fn to_esc(&self) -> String {
-        return match self {
-            Color::Ansi(c) => esc(&format!("3{}m", c)),
-            Color::Rgb(rgb) => WRAP_SEQ(&rgb.to_ansi_foreground()),
-        };
-    }
-}
+use crate::colors::terminal_color::TerminalColor;
 
 pub struct PlainFormatter {
-    colors: Vec<Color>,
+    colors: Vec<TerminalColor>,
 }
 
 impl Formatter for PlainFormatter {
@@ -32,21 +17,21 @@ impl Formatter for PlainFormatter {
             // do not waste any stuff
             return format!(
                 "{}{}{}",
-                self.colors[0].to_esc(),
+                self.colors[0].to_ansi_foreground(),
                 text,
                 esc("0m"),
             );
         }
         let mut variation = 0;
         let mut res = String::new();
-        let mut prev: &Color = &Color::Ansi(' '); // anything
+        let mut prev: &TerminalColor = &TerminalColor::Ansi(' '); // anything
         for ch in text.chars() {
             let col = &self.colors[variation];
             if col != prev {
                 // optimize the number of escape sequences for repeating colors
                 res.push_str(&format!(
                     "{}{}",
-                    col.to_esc(),
+                    col.to_ansi_foreground(),
                     ch,
                 ));
             } else {
@@ -63,43 +48,19 @@ impl Formatter for PlainFormatter {
     }
 }
 
-// for getting the data
-fn verify_and_extract(chunk: &str) -> Option<Color> {
-    if let Some(parsed_rgb) = RGB::try_parse(&chunk) {
-        return Some(Color::Rgb(parsed_rgb));
-    }
-    if chunk.len() == 1 {
-        let v = chunk
-            .chars().nth(0).unwrap();
-        // verifying
-        if v == '0'
-        || v == '1'
-        || v == '2'
-        || v == '3'
-        || v == '4'
-        || v == '5'
-        || v == '6'
-        || v == '7'
-        || v == '9' {
-            return Some(Color::Ansi(v));
-        }
-    }
-    None
-}
-
 impl PlainFormatter {
     pub fn from_conf(conf: &str) -> Self {
-        let mut res: Vec<Color> = Vec::new();
+        let mut res: Vec<TerminalColor> = Vec::new();
         let sp = conf.split_whitespace();
         for chunk in sp {
-            if let Some(ch) = verify_and_extract(chunk) {
-                res.push(ch);
+            if let Some(col) = TerminalColor::try_parse(chunk) {
+                res.push(col);
             } else {
                 eprintln!("blazesh: invalid color code at BLAZESH_ACCENT_COLOR: {}", chunk);
             }
         }
         if res.is_empty() {
-            res.push(Color::Rgb(RGB::try_parse("FF9900").unwrap())); // default
+            res.push(TerminalColor::Rgb(RGB::try_parse("FF9900").unwrap())); // default
         }
         Self { colors: res }
     }
