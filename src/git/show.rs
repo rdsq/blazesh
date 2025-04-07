@@ -1,6 +1,6 @@
-use crate::git::status::git_status;
+use super::status::git_status;
 use crate::colors::esc::color;
-use crate::git::modes::decide::{decide, Decision};
+use super::modes::decide::{decide, Decision};
 
 fn construct_one_icon(symbol: &str, condition: &bool) -> String {
     if *condition {
