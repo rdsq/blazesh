@@ -1,5 +1,5 @@
 use std::env;
-use crate::colors::formatters::{formatter_trait, plain, gradient};
+use super::formatters::{formatter_trait, plain, gradient};
 
 pub fn get_formatter() -> Box<dyn formatter_trait::Formatter> {
     if let Ok(custom) = env::var("BLAZESH_ACCENT_COLOR") {

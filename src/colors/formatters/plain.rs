@@ -1,5 +1,5 @@
 use crate::colors::esc::esc_sequence as esc;
-use crate::colors::formatters::formatter_trait::Formatter;
+use super::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
 use crate::colors::terminal_color::TerminalColor;
 

@@ -1,4 +1,4 @@
-use crate::colors::wrap::WRAP_SEQ;
+use super::wrap::WRAP_SEQ;
 
 pub fn esc_sequence(sequence: &str) -> String {
     WRAP_SEQ(&format!("\x1b[{}", sequence))

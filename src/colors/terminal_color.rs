@@ -1,6 +1,6 @@
-use crate::colors::esc::esc_sequence;
-use crate::colors::wrap::WRAP_SEQ;
-use crate::colors::rgb::RGB;
+use super::esc::esc_sequence;
+use super::wrap::WRAP_SEQ;
+use super::rgb::RGB;
 
 #[derive(PartialEq)]
 pub enum TerminalColor {
