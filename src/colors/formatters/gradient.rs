@@ -12,12 +12,19 @@ impl Formatter for GradientFormatter {
     fn format_str(&self, text: &str) -> String {
         let num_items = text.len();
         let mut result = String::new();
+        let mut prev = None;
         for (i, ch) in text.chars().enumerate() {
             let t = i as f32 / num_items as f32;
             let color = self.start.lerp(&self.end, t);
-            result.push_str(
-                &format!("{}{}", WRAP_SEQ(&color.to_ansi_foreground()), ch)
-            )
+            let color_id_i_guess = color.to_ansi256();
+            if prev != Some(color_id_i_guess) {
+                // optimization
+                result.push_str(
+                    &WRAP_SEQ(&color.to_ansi_foreground())
+                );
+                prev = Some(color_id_i_guess);
+            }
+            result.push(ch);
         }
         result.push_str(&esc_sequence("0m"));
         result
