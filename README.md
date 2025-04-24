@@ -111,6 +111,15 @@ You can change how exit codes will be shown in the prompt by editing `BLAZESH_EX
 - `message`: just show the message if available, good for being compact. Example: `[SIGINT]`
 - `both` *(default)*: show both the code and the message. Example: `[130/SIGINT]`
 
+### Path shorthands
+
+By default, it shortens `$HOME` as `~`, but you can define your own custom shorthands with `BLAZESH_PATH_SHORTHANDS` in `path:shorthand` format. Just don't forget to add `$HOME:~` first
+
+For example, `$HOME:~;/root:r~` would show paths as:
+
+- `$HOME/something`: `~/something`
+- `/root/something`: `r~/something`
+
 ## Example configurations
 
 ### Insanity
