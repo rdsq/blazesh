@@ -1,24 +1,52 @@
 use crate::colors::esc::color;
 
-fn format_special(exit_code: &i32) -> String {
+fn format_special(exit_code: &str) -> Option<String> {
     return match exit_code {
-        126 => "126/e403".to_string(),
-        127 => "127/e404".to_string(),
-        130 => "130/SIGINT".to_string(),
-        137 => "137/SIGKILL".to_string(),
-        143 => "143/SIGTERM".to_string(),
-        n => {
-            if *n < 0 || *n > 255 {
-                return format!("{}/fancyy", n);
-            }
-            return n.to_string();
-        },
+        "126" => Some("e403".to_string()),
+        "127" => Some("e404".to_string()),
+        "130" => Some("SIGINT".to_string()),
+        "137" => Some("SIGKILL".to_string()),
+        "143" => Some("SIGTERM".to_string()),
+        _ => None,
     };
 }
 
-pub fn format_code(exit_code: &i32) -> String {
+enum CodeConfig {
+    Code,
+    Message,
+    Both,
+}
+
+fn get_config() -> CodeConfig {
+    let val = std::env::var("BLAZESH_EXIT_CODE_FORMAT");
+    if let Ok(mode) = val {
+        return match &mode as &str {
+            "code" => CodeConfig::Code,
+            "message" => CodeConfig::Message,
+            "both" => CodeConfig::Both,
+            _ => {
+                eprintln!("blazesh: unknown BLAZESH_EXIT_CODE_FORMAT value");
+                CodeConfig::Both
+            }
+        }
+    }
+    CodeConfig::Both // default
+}
+
+pub fn format_code(exit_code: &str) -> String {
+    let message = match get_config() {
+        CodeConfig::Code => exit_code.to_string(),
+        CodeConfig::Message => format_special(exit_code).unwrap_or(exit_code.to_string()),
+        CodeConfig::Both => {
+            if let Some(special) = format_special(exit_code) {
+                format!("{}/{}", exit_code, special)
+            } else {
+                exit_code.to_string()
+            }
+        },
+    };
     format!(
         "{} ",
-        color("31", &format!("[{}]", format_special(exit_code))),
+        color("31", &format!("[{}]", message)),
     )
 }

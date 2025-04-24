@@ -103,6 +103,14 @@ Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replasimg t
 - `1` - `.../src`
 - `2` *(and higher)* - `~/blazesh/src`
 
+### Exit codes format
+
+You can change how exit codes will be shown in the prompt by editing `BLAZESH_EXIT_CODE_FORMAT`. Possible values:
+
+- `code`: just the code, no message, if you like it serious. Example: `[130]`
+- `message`: just show the message if available, good for being compact. Example: `[SIGINT]`
+- `both` *(default)*: show both the code and the message. Example: `[130/SIGINT]`
+
 ## Example configurations
 
 ### Insanity

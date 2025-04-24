@@ -2,22 +2,18 @@ use std::env;
 
 #[derive(Debug)]
 pub struct ParsedArgs {
-    pub exit_code: i32, // some systems support exit codes outside `u8`
+    pub exit_code: String,
     pub jobs_number: String,
 }
 
-fn get_exit_code_arg(arg: Option<String>) -> i32 {
-    if let Some(code_str) = arg {
-        if let Ok(exit_code) = code_str.parse::<i32>() {
-            return exit_code;
-        } else {
-            eprintln!("blazesh: failed to parse exit code from \"{}\"", code_str);
-        }
+fn get_exit_code_arg(arg: Option<String>) -> String {
+    if let Some(exit_code) = arg {
+        return exit_code;
     } else {
         eprintln!("blazesh: exit code argument not provided");
     }
     // synthetic default
-    0
+    "0".to_string()
 }
 
 fn get_jobs_arg(arg: Option<String>) -> String {

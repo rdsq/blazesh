@@ -18,7 +18,7 @@ fn main() {
     let formatter = colors::get_config::get_formatter();
     print!(
         "{}{} {}{}",
-        if args.exit_code == 0 { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
+        if &args.exit_code == "0" { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
         format!("{}{}", colors::esc::esc_sequence("1m"), formatter.format_str(
             &path_display::path_display_wrapper(&cwd),
         )),
