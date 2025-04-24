@@ -38,7 +38,10 @@ pub fn format_code(exit_code: &str) -> String {
         CodeConfig::Code => exit_code.to_string(),
         CodeConfig::Message => format_special(exit_code).unwrap_or(exit_code.to_string()),
         CodeConfig::Both => {
-            if let Some(special) = format_special(exit_code) {
+            if exit_code.parse::<u8>().is_err() {
+                format!("{}/fancy", exit_code)
+            }
+            else if let Some(special) = format_special(exit_code) {
                 format!("{}/{}", exit_code, special)
             } else {
                 exit_code.to_string()
