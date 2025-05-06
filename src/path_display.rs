@@ -54,12 +54,14 @@ fn path_display(original_path: &str, depth: u8, is_first: bool, path_shorthands:
     );
 }
 
+const PATH_DEPTH: &str = "BLAZESH_PATH_DEPTH";
+
 fn get_depth() -> u8 {
-    if let Ok(depth_str) = std::env::var("BLAZESH_PATH_DEPTH") {
+    if let Ok(depth_str) = std::env::var(PATH_DEPTH) {
         if let Ok(depth) = depth_str.parse::<u8>() {
             return depth;
         } else {
-            eprintln!("blazesh: invalid BLAZESH_PATH_DEPTH value: {}", depth_str);
+            eprintln!("blazesh: invalid {}: {}", PATH_DEPTH, depth_str);
         }
     }
     2 // default
