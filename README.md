@@ -45,7 +45,7 @@ eval "$(blazesh setup detect)"
 ### Fish `~/.config/fish/config.fish`
 
 ```fish
-blazesh setup fish | source
+source (blazesh setup fish | psub)
 ```
 
 ## Features
