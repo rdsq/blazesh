@@ -24,6 +24,6 @@ pub fn setup(args: Setup) {
             print!("{}", include_str!("./snippets/zsh.sh"));
         },
         Shell::Detect => print!("{}", include_str!("./snippets/detect.sh")),
-        Shell::Fish => todo!(),
+        Shell::Fish => print!("{}", include_str!("./snippets/fish.fish")),
     };
 }
