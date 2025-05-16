@@ -16,28 +16,36 @@ There might be a few "why" questions related to this project
 
 ## Installation
 
-Simply clone it somewhere using `git`
+You can install it using:
 
 ```sh
-git clone https://github.com/rdsq/blazesh
+cargo install --git https://github.com/rdsq/blazesh
 ```
 
-Then add this line to `.zshrc` or `.bashrc`
+And then add one of these to your shell config file:
 
-```zsh
-# Replace `~/blazesh` with your path
-source ~/blazesh/blazesh.sh
-```
-
-And don't forget to compile it using `cargo build --release`. So the full script to install it:
+### Bash `~/.bashrc`
 
 ```sh
-git clone https://github.com/rdsq/blazesh ~/blazesh
-echo "source ~/blazesh/blazesh.sh" >> ~/.zshrc
-echo "source ~/blazesh/blazesh.sh" >> ~/.bashrc
-cd ~/blazesh
-cargo build --release
-cd -
+eval "$(blazesh setup bash)"
+```
+
+### Zsh `~/.zshrc`
+
+```sh
+eval "$(blazesh setup zsh)"
+```
+
+### Bash or Zsh autodetect
+
+```sh
+eval "$(blazesh setup detect)"
+```
+
+### Fish `~/.config/fish/config.fish`
+
+```fish
+blazesh setup fish | source
 ```
 
 ## Features
