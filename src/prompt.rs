@@ -5,7 +5,11 @@ use crate::colors;
 use crate::path_display;
 use crate::jobs;
 
-pub fn prompt() {
+#[derive(clap::Parser, Debug)]
+/// Generate shell prompt
+pub struct Prompt {}
+
+pub fn prompt(_args: Prompt) {
     let args = parse_args();
     // Get current working directory
     let cwd = std::env::current_dir()

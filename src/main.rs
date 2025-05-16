@@ -6,7 +6,25 @@ mod git;
 mod dir_representation;
 mod colors;
 mod prompt;
+use clap::{Parser, Subcommand};
+
+#[derive(Parser)]
+#[command(name = "blazesh")]
+#[command(about = "Custom shell prompt")]
+struct Cli {
+    #[command(subcommand)]
+    command: Commands,
+}
+
+#[derive(Subcommand)]
+enum Commands {
+    Prompt(prompt::Prompt),
+}
 
 fn main() {
-    prompt::prompt();
+    let cli = Cli::parse();
+
+    match cli.command {
+        Commands::Prompt(args) => prompt::prompt(args),
+    };
 }
