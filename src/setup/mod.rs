@@ -15,9 +15,15 @@ pub struct Setup {
 
 pub fn setup(args: Setup) {
     match args.shell {
-        Shell::Bash => todo!(),
-        Shell::Zsh => todo!(),
-        Shell::Detect => print!(include_str!("./snippets/detect.sh")),
+        Shell::Bash => {
+            print!("{}", include_str!("./snippets/construct-prompt.sh"));
+            print!("{}", include_str!("./snippets/bash.sh"));
+        },
+        Shell::Zsh => {
+            print!("{}", include_str!("./snippets/construct-prompt.sh"));
+            print!("{}", include_str!("./snippets/zsh.sh"));
+        },
+        Shell::Detect => print!("{}", include_str!("./snippets/detect.sh")),
         Shell::Fish => todo!(),
     };
 }
