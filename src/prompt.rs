@@ -11,8 +11,6 @@ pub struct Prompt {
     exit_code: String,
     /// Jobs number
     jobs_number: String,
-    /// Shell name
-    shell: crate::shell::Shell,
 }
 
 pub fn prompt(args: Prompt) {
