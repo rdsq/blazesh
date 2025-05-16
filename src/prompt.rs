@@ -1,4 +1,3 @@
-use crate::cli::parse_args;
 use crate::git;
 use crate::exit_codes;
 use crate::colors;
@@ -7,10 +6,16 @@ use crate::jobs;
 
 #[derive(clap::Parser, Debug)]
 /// Generate shell prompt
-pub struct Prompt {}
+pub struct Prompt {
+    /// Exit code (`$?`)
+    exit_code: String,
+    /// Jobs number
+    jobs_number: String,
+    /// Shell name
+    shell: crate::shell::Shell,
+}
 
-pub fn prompt(_args: Prompt) {
-    let args = parse_args();
+pub fn prompt(args: Prompt) {
     // Get current working directory
     let cwd = std::env::current_dir()
         .map(|path| path.display().to_string())
