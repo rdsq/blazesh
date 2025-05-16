@@ -5,7 +5,7 @@ mod git;
 mod dir_representation;
 mod colors;
 mod prompt;
-mod shell;
+mod setup;
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
@@ -19,6 +19,7 @@ struct Cli {
 #[derive(Subcommand)]
 enum Commands {
     Prompt(prompt::Prompt),
+    Setup(setup::Setup),
 }
 
 fn main() {
@@ -26,5 +27,6 @@ fn main() {
 
     match cli.command {
         Commands::Prompt(args) => prompt::prompt(args),
+        Commands::Setup(args) => setup::setup(args),
     };
 }
