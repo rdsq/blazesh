@@ -14,7 +14,7 @@ impl Formatter for GradientFormatter {
         if text.len() == 1 {
             return format!(
                 "{}{}{}",
-                self.colors[0].to_ansi_foreground(),
+                WRAP_SEQ(&self.colors[0].to_ansi_foreground()),
                 text,
                 esc_sequence("0m"),
             );
