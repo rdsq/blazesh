@@ -34,15 +34,4 @@ impl RGB {
     pub fn to_ansi_foreground(&self) -> String {
         format!("\x1b[38;5;{}m", self.to_ansi256())
     }
-    pub fn lerp(&self, other: &Self, t: f32) -> Self {
-        // some really smart stuff for gradients
-        fn mix(a: u8, b: u8, t: f32) -> u8 {
-            (a as f32 + (b as f32 - a as f32) * t).round() as u8
-        }
-        Self {
-            r: mix(self.r, other.r, t),
-            g: mix(self.g, other.g, t),
-            b: mix(self.b, other.b, t),
-        }
-    }
 }

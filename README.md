@@ -93,13 +93,20 @@ You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR
 
 **But** it also has the second mode: **gradient**
 
-You can set a gradient between any two RGB values by following the `gradient [color1] [color2]` syntax
+You can set a gradient between any two RGB values by following the `gradient [color1] [color2] ... [color_n]` syntax
 
 For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 0057B7 FFD700` to see the gradient between the official 🇺🇦 colors
 
 ![Really long path showing a gradient from blue to yellow](./media/gradient.jpg)
 
 And the default color is a gradient too! It is `gradient FF9900 FFFF00`
+
+You can even define gradient looping! This means that app the colors will repeat after certain number of characters
+
+```sh
+# For RGB
+export BLAZESH_ACCENT_COLOR="gradient FF0000 00FF00 0000FF interval=10"
+```
 
 ### Path
 

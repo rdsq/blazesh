@@ -15,7 +15,10 @@ pub fn get_formatter() -> Box<dyn formatter_trait::Formatter> {
     }
     // default
     Box::new(gradient::GradientFormatter {
-        start: RGB { r: 255, g: 153, b: 0 }, // FF9900
-        end:   RGB { r: 255, g: 255, b: 0 }, // FFFF00
+        colors: vec![
+            RGB { r: 255, g: 153, b: 0 }, // FF9900
+            RGB { r: 255, g: 255, b: 0 }, // FFFF00
+        ],
+        interval: None,
     })
 }

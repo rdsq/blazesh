@@ -2,20 +2,21 @@ use crate::colors::esc::esc_sequence;
 use crate::colors::wrap::WRAP_SEQ;
 use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
+use crate::colors::gradient::gradient;
 
 pub struct GradientFormatter {
-    pub start: RGB,
-    pub end: RGB,
+    pub colors: Vec<RGB>,
+    pub interval: Option<f32>,
 }
 
 impl Formatter for GradientFormatter {
     fn format_str(&self, text: &str) -> String {
-        let num_items = text.len();
         let mut result = String::new();
         let mut prev = None;
         for (i, ch) in text.chars().enumerate() {
-            let t = i as f32 / num_items as f32;
-            let color = self.start.lerp(&self.end, t);
+            let interval = self.interval.unwrap_or(text.len() as f32);
+            let t = (i as f32 / (interval - 1.0)) * (self.colors.len() - 1) as f32;
+            let color = gradient(&self.colors, t);
             let color_id_i_guess = color.to_ansi256();
             if prev != Some(color_id_i_guess) {
                 // optimization
@@ -35,11 +36,24 @@ impl GradientFormatter {
     pub fn from_conf(conf: &str) -> Option<Self> {
         let mut sp = conf.split_whitespace();
         sp.next(); // skip `gradient` keyword
-        if let (Some(start_str), Some(end_str)) = (sp.next(), sp.next()) {
-            if let (Some(start), Some(end)) = (RGB::try_parse(start_str), RGB::try_parse(end_str)) {
-                return Some(Self { start, end });
+        let mut interval = None;
+        let mut colors = Vec::new();
+        for i in sp {
+            if let Some((kw, interval_inp)) = i.split_once('=') {
+                if kw == "interval" {
+                    if let Ok(interval_val) = interval_inp.parse::<f32>() {
+                        interval = Some(interval_val);
+                        continue;
+                    }
+                }
+            }
+            if let Some(color) = RGB::try_parse(i) {
+                colors.push(color);
             }
         }
-        None
+        if colors.len() < 2 {
+            return None;
+        }
+        Some(Self { colors, interval })
     }
 }
