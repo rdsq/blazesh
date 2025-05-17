@@ -19,6 +19,6 @@ pub fn get_formatter() -> Box<dyn formatter_trait::Formatter> {
             RGB { r: 255, g: 153, b: 0 }, // FF9900
             RGB { r: 255, g: 255, b: 0 }, // FFFF00
         ],
-        interval: None,
+        interval: Some(10.0),
     })
 }

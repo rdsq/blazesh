@@ -100,14 +100,14 @@ For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 00
 
 ![Really long path showing a gradient from blue to yellow](./media/gradient.jpg)
 
-And the default color is a gradient too! It is `gradient FF9900 FFFF00`
-
 You can even define gradient looping! This means that app the colors will repeat after certain number of characters
 
 ```sh
 # For RGB
 export BLAZESH_ACCENT_COLOR="gradient FF0000 00FF00 0000FF interval=10"
 ```
+
+And the default color is a looping gradient too! It is `gradient FF9900 FFFF00 interval=10`
 
 ### Path
 
