@@ -11,6 +11,14 @@ pub struct GradientFormatter {
 
 impl Formatter for GradientFormatter {
     fn format_str(&self, text: &str) -> String {
+        if text.len() == 1 {
+            return format!(
+                "{}{}{}",
+                self.colors[0].to_ansi_foreground(),
+                text,
+                esc_sequence("0m"),
+            );
+        }
         let mut result = String::new();
         let mut prev = None;
         for (i, ch) in text.chars().enumerate() {
