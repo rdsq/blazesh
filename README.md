@@ -1,4 +1,4 @@
-# Blazesh
+![Blazesh](./media/blazesh.jpg)
 
 It is a custom shell prompt theme made in Rust
 
