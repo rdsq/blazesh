@@ -11,7 +11,7 @@ It was created to be minimal, compact, beautiful, smart (compared to a potato), 
 There might be a few "why" questions related to this project
 
 1. **Why Rust?** Because it is easier. I know, it is a complied language, but it is so much easier to implement complex features than in shell scripts, it doesn't have to run a thousand commands to do something simple. And just because why not
-2. **Why Blazesh?** As a reference to the fact that everything written in Rust is blazingly fast. It's not the primary goal, if you want the fastest experiene, just run `PS1='$ '` in your shell. I just like how Blazesh sounds
+2. **Why Blazesh?** As a reference to the fact that everything written in Rust is blazingly fast. It's not the primary goal, if you want the fastest experience, just run `PS1='$ '` in your shell. I just like how Blazesh sounds
 3. **Why (in general)?** To create something that would be the closest to my ideal prompt. Also to be a fun project
 
 ## Installation
@@ -111,7 +111,7 @@ And the default color is a looping gradient too! It is `gradient FF9900 FFFF00 i
 
 ### Path
 
-Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replasimg them with `...`. Any number from 0 to 255. **Default: 2**
+Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replacing them with `...`. Any number from 0 to 255. **Default: 2**
 
 **Examples with values and how it displays the path**:
 
@@ -140,7 +140,7 @@ For example, `$HOME:~;/root:r~` would show paths as:
 
 ### Insanity
 
-*You have the fredom to make your command prompt look insane if you are*
+*You have the freedom to make your command prompt look insane if you are*
 
 ![Command prompt showing path of ~/mydir/another/one/so/many/dirs/im/insane/i/mean/imnot/im/just/showingwhat/aninsaneperson/woulddo in full and repeating ANSI rainbow](./media/insanity.jpg)
 
