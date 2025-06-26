@@ -119,6 +119,8 @@ Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replacing t
 - `1` - `.../src`
 - `2` *(and higher)* - `~/blazesh/src`
 
+And you can also set the accent color to `none` to disable the colors in the path. Not sure why, but you can
+
 ### Exit codes format
 
 You can change how exit codes will be shown in the prompt by editing `BLAZESH_EXIT_CODE_FORMAT`. Possible values:
