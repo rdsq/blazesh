@@ -1,4 +1,4 @@
-use crate::colors::esc::color;
+use crate::colors::escseq::EscSeqFormat;
 
 fn format_special(exit_code: &str) -> Option<String> {
     return match exit_code {
@@ -35,7 +35,7 @@ fn get_config() -> CodeConfig {
     CodeConfig::Both // default
 }
 
-pub fn format_code(exit_code: &str) -> String {
+pub fn format_code(escformat: &EscSeqFormat, exit_code: &str) -> String {
     let message = match get_config() {
         CodeConfig::Code => exit_code.to_string(),
         CodeConfig::Message => format_special(exit_code).unwrap_or(exit_code.to_string()),
@@ -51,6 +51,6 @@ pub fn format_code(exit_code: &str) -> String {
     };
     format!(
         "{} ",
-        color("31", &format!("[{}]", message)),
+        escformat.color("31", &format!("[{}]", message)),
     )
 }

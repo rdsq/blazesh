@@ -1,12 +1,13 @@
-use crate::colors::esc::esc_sequence as esc;
 use super::formatter_trait::Formatter;
 use crate::colors::terminal_color::TerminalColor;
+use crate::colors::escseq::EscSeqFormat;
 
-pub struct PlainFormatter {
+pub struct PlainFormatter<'a> {
     colors: Vec<TerminalColor>,
+    escformat: &'a EscSeqFormat,
 }
 
-impl Formatter for PlainFormatter {
+impl <'a>Formatter<'a> for PlainFormatter<'a> {
     fn format_str(&self, text: &str) -> String {
         let num_items = self.colors.len();
         if num_items == 0 {
@@ -16,9 +17,9 @@ impl Formatter for PlainFormatter {
             // do not waste any stuff
             return format!(
                 "{}{}{}",
-                self.colors[0].to_ansi_foreground(),
+                self.colors[0].to_ansi_foreground(&self.escformat),
                 text,
-                esc("0m"),
+                self.escformat.esc("0m"),
             );
         }
         let mut variation = 0;
@@ -30,7 +31,7 @@ impl Formatter for PlainFormatter {
                 // optimize the number of escape sequences for repeating colors
                 res.push_str(&format!(
                     "{}{}",
-                    col.to_ansi_foreground(),
+                    col.to_ansi_foreground(&self.escformat),
                     ch,
                 ));
             } else {
@@ -42,13 +43,13 @@ impl Formatter for PlainFormatter {
                 variation = 0; // reset
             }
         }
-        res.push_str(&esc("0m"));
+        res.push_str(&self.escformat.esc("0m"));
         res
     }
 }
 
-impl PlainFormatter {
-    pub fn from_conf(conf: &str) -> Option<Self> {
+impl <'a>PlainFormatter<'a> {
+    pub fn from_conf(conf: &str, escformat: &'a EscSeqFormat) -> Option<Self> {
         let mut res: Vec<TerminalColor> = Vec::new();
         let sp = conf.split_whitespace();
         for chunk in sp {
@@ -61,6 +62,6 @@ impl PlainFormatter {
         if res.is_empty() {
             return None;
         }
-        Some(Self { colors: res })
+        Some(Self { colors: res, escformat })
     }
 }

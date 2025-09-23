@@ -1,6 +1,5 @@
-use super::esc::esc_sequence;
-use super::wrap::WRAP_SEQ;
 use super::rgb::RGB;
+use super::escseq::EscSeqFormat;
 
 #[derive(PartialEq)]
 pub enum TerminalColor {
@@ -9,10 +8,10 @@ pub enum TerminalColor {
 }
 
 impl TerminalColor {
-    pub fn to_ansi_foreground(&self) -> String {
+    pub fn to_ansi_foreground(&self, escformat: &EscSeqFormat) -> String {
         return match self {
-            Self::Ansi(c) => esc_sequence(&format!("3{}m", c)),
-            Self::Rgb(rgb) => WRAP_SEQ(&rgb.to_ansi_foreground()),
+            Self::Ansi(c) => escformat.esc(&format!("3{}m", c)),
+            Self::Rgb(rgb) => escformat.wrap(&rgb.to_ansi_foreground()),
         };
     }
     pub fn try_parse(chunk: &str) -> Option<Self> {

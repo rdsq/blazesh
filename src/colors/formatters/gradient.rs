@@ -1,22 +1,22 @@
-use crate::colors::esc::esc_sequence;
-use crate::colors::wrap::WRAP_SEQ;
+use crate::colors::escseq::EscSeqFormat;
 use crate::colors::formatters::formatter_trait::Formatter;
 use crate::colors::rgb::RGB;
 use crate::colors::gradient::gradient;
 
-pub struct GradientFormatter {
+pub struct GradientFormatter<'a> {
     pub colors: Vec<RGB>,
     pub interval: Option<f32>,
+    pub escformat: &'a EscSeqFormat,
 }
 
-impl Formatter for GradientFormatter {
+impl <'a>Formatter<'a> for GradientFormatter<'a> {
     fn format_str(&self, text: &str) -> String {
         if text.len() == 1 {
             return format!(
                 "{}{}{}",
-                WRAP_SEQ(&self.colors[0].to_ansi_foreground()),
+                self.escformat.wrap(&self.colors[0].to_ansi_foreground()),
                 text,
-                esc_sequence("0m"),
+                self.escformat.esc("0m"),
             );
         }
         let mut result = String::new();
@@ -29,19 +29,19 @@ impl Formatter for GradientFormatter {
             if prev != Some(color_id_i_guess) {
                 // optimization
                 result.push_str(
-                    &WRAP_SEQ(&color.to_ansi_foreground())
+                    &self.escformat.wrap(&color.to_ansi_foreground())
                 );
                 prev = Some(color_id_i_guess);
             }
             result.push(ch);
         }
-        result.push_str(&esc_sequence("0m"));
+        result.push_str(&self.escformat.esc("0m"));
         result
     }
 }
 
-impl GradientFormatter {
-    pub fn from_conf(conf: &str) -> Option<Self> {
+impl <'a>GradientFormatter<'a> {
+    pub fn from_conf(conf: &str, escformat: &'a EscSeqFormat) -> Option<Self> {
         let mut sp = conf.split_whitespace();
         sp.next(); // skip `gradient` keyword
         let mut interval = None;
@@ -62,6 +62,6 @@ impl GradientFormatter {
         if colors.len() < 2 {
             return None;
         }
-        Some(Self { colors, interval })
+        Some(Self { colors, interval, escformat })
     }
 }

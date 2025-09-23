@@ -1,6 +1,7 @@
 use crate::git;
 use crate::exit_codes;
-use crate::colors;
+use crate::colors::escseq::EscSeqFormat;
+use crate::colors::get_config::get_formatter;
 use crate::path_display;
 use crate::jobs;
 
@@ -11,6 +12,8 @@ pub struct Prompt {
     exit_code: String,
     /// Jobs number
     jobs_number: String,
+    /// The shell that's used and its formatting of escape sequences
+    escformat: EscSeqFormat,
 }
 
 pub fn prompt(args: Prompt) {
@@ -19,15 +22,15 @@ pub fn prompt(args: Prompt) {
         .map(|path| path.display().to_string())
         .unwrap_or_else(|_| "unknown".to_string());
 
-    let git_status = git::show::show_git_status();
-    let formatter = colors::get_config::get_formatter();
+    let git_status = git::show::show_git_status(&args.escformat);
+    let formatter = get_formatter(&args.escformat);
     print!(
         "{}{} {}{}",
-        if &args.exit_code == "0" { "".to_string() } else { exit_codes::format_code(&args.exit_code) },
-        format!("{}{}", colors::esc::esc_sequence("1m"), formatter.format_str(
+        if &args.exit_code == "0" { "".to_string() } else { exit_codes::format_code(&args.escformat, &args.exit_code) },
+        format!("{}{}", args.escformat.esc("1m"), formatter.format_str(
             &path_display::path_display_wrapper(&cwd),
         )),
-        jobs::show_jobs(&args.jobs_number),
+        jobs::show_jobs(&args.escformat, &args.jobs_number),
         git_status,
     );
 }
