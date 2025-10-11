@@ -138,6 +138,12 @@ For example, `$HOME:~;/root:r~` would show paths as:
 - `$HOME/something`: `~/something`
 - `/root/something`: `r~/something`
 
+### Non-default shell
+
+This prompt can also show that you're using a shell that is different from the default one set with `chsh`
+
+If you want to disable this, set `BLAZESH_NON_DEFAULT_SHELL` to `disabled`
+
 ## Example configurations
 
 ### Insanity

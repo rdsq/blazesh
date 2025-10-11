@@ -1,16 +1,16 @@
 #[derive(Debug, Clone, clap::ValueEnum)]
 pub enum EscSeqFormat {
-    Other,
     Bash,
     Zsh,
+    Fish,
 }
 
 impl EscSeqFormat {
     pub fn wrap(&self, seq: &str) -> String {
         match self {
-            Self::Other => seq.to_owned(),
             Self::Bash => format!("\\[{}\\]", seq),
             Self::Zsh => format!("%{{{}%}}", seq),
+            Self::Fish => seq.to_owned(),
         }
     }
     pub fn esc(&self, seq: &str) -> String {
@@ -23,5 +23,12 @@ impl EscSeqFormat {
             text,
             self.esc("0m"),
         )
+    }
+    pub fn to_str(&self) -> &'static str {
+        match self {
+            Self::Bash => "bash",
+            Self::Zsh => "zsh",
+            Self::Fish => "fish",
+        }
     }
 }

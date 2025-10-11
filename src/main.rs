@@ -5,6 +5,7 @@ mod git;
 mod colors;
 mod prompt;
 mod setup;
+mod non_default_shell;
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
