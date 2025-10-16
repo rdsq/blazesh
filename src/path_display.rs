@@ -43,7 +43,7 @@ fn path_display(original_path: &str, depth: u8, is_first: bool, path_shorthands:
         }
     }
     if depth == 0 {
-        return "...".to_string();
+        return "…".to_string();
     }
     let basename = path_from_os_str(&path.file_name());
     path.pop();

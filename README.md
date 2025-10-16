@@ -111,12 +111,14 @@ And the default color is a looping gradient too! It is `gradient FF9900 FFFF00 i
 
 ### Path
 
-Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replacing them with `...`. Any number from 0 to 255. **Default: 2**
+Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replacing them with `…`. Any number from 0 to 255. **Default: 2**
+
+*(It uses Unicode HORIZONTAL ELLIPSIS `…` instead of three dots `...` to save some screen space. That's the point, after all)*
 
 **Examples with values and how it displays the path**:
 
-- `0` - `...`
-- `1` - `.../src`
+- `0` - `…`
+- `1` - `…/src`
 - `2` *(and higher)* - `~/blazesh/src`
 
 And you can also set the accent color to `none` to disable the colors in the path. Not sure why, but you can
