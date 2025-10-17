@@ -13,26 +13,17 @@ pub struct Setup {
     shell: Shell,
 }
 
-const CONSTRUCT_PROMPT: &str = include_str!("./snippets/construct-prompt.sh");
-const BASH: &str = include_str!("./snippets/bash.sh");
-const ZSH: &str = include_str!("./snippets/zsh.sh");
-
 pub fn setup(args: Setup) {
     match args.shell {
         Shell::Bash => {
-            print!("{}", CONSTRUCT_PROMPT);
-            print!("{}", BASH);
+            print!(include_str!("./snippets/construct-prompt.sh"), "bash");
+            print!("{}", include_str!("./snippets/bash.sh"));
         },
         Shell::Zsh => {
-            print!("{}", CONSTRUCT_PROMPT);
-            print!("{}", ZSH);
+            print!(include_str!("./snippets/construct-prompt.sh"), "zsh");
+            print!("{}", include_str!("./snippets/zsh.sh"));
         },
-        Shell::Detect => print!(
-            include_str!("./snippets/detect.sh"),
-            CONSTRUCT_PROMPT,
-            BASH,
-            ZSH,
-        ),
+        Shell::Detect => print!("{}", include_str!("./snippets/detect.sh")),
         Shell::Fish => print!("{}", include_str!("./snippets/fish.fish")),
     };
 }
