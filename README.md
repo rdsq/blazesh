@@ -1,6 +1,6 @@
 ![Blazesh](./media/blazesh.jpg)
 
-It is a custom shell prompt theme made in Rust
+It is a shy shell prompt theme made in Rust. Shy means that it leaves nothing in you environment. No `.config`, no variables. Well, except polluting the env variables... Didn't think it through
 
 ![Blazesh demo](./media/demo.jpg)
 
@@ -8,11 +8,13 @@ It was created to be minimal, compact, beautiful, smart (compared to a potato), 
 
 ## Why
 
-There might be a few "why" questions related to this project
+1. As a fun thing
+2. I was bored
+3. Eye candy
+4. Make using the command line more comfortable
+5. Main reason is, though, using [Starship](https://github.com/starship/starship) is for normies. **Real nerds** write their own shell prompts
 
-1. **Why Rust?** Because it is easier. I know, it is a complied language, but it is so much easier to implement complex features than in shell scripts, it doesn't have to run a thousand commands to do something simple. And just because why not
-2. **Why Blazesh?** As a reference to the fact that everything written in Rust is blazingly fast. It's not the primary goal, if you want the fastest experience, just run `PS1='$ '` in your shell. I just like how Blazesh sounds
-3. **Why (in general)?** To create something that would be the closest to my ideal prompt. Also to be a fun project
+And I called it **Blazesh** in reference to the meme, not like it was created to be brazingly fast
 
 ## Installation
 
