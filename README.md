@@ -48,27 +48,17 @@ eval "$(blazesh setup detect)"
 source (blazesh setup fish | psub)
 ```
 
-## Features
+## Features & Configuration
 
-The prompt shows a clean path, if it is too long it is cut
+Here is how you can configure Blazesh with environment variables:
 
-It also shows the error exit codes, some of them with special messages *(doesn't work on Bash)*
+### Git
 
-And the git panel, yes it kind of takes time to load, but it is helpful
+It shows a git panel, yes it kind of takes time to load, but it is helpful
 
 - `+` represents the uncommitted changes
 - `↑` represents unpushed changes
 - `↓` represents unpulled changes
-
-And it also shows the number of background jobs if it is not `0` like this:
-
-![Blazesh showing the jobs number in brackets as 1 after running `sleep 5` on background](./media/jobs.jpg)
-
-## Configuration
-
-Here is how you can configure Blazesh with environment variables:
-
-### Git mode
 
 You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environment variable. **Possible values:**
 
@@ -145,6 +135,18 @@ For example, `$HOME:~;/root:r~` would show paths as:
 This prompt can also show that you're using a shell that is different from the default one set with `chsh`
 
 If you want to disable this, set `BLAZESH_NON_DEFAULT_SHELL` to `disabled`
+
+### ls
+
+This one was made to feel more comfortable using the command line, it shows the contents of your current directory as `(DIRS FILES DOTS)` *(disabled by default)*
+
+You can enable it by setting `BLAZESH_LS=enabled`. You can also configure the dots mode. (dots referring to all items starting with `.`, e.g. `.git`, `.zshrc`)
+
+You can change your preferred dots mode with:
+
+- `dots=ignored`: does not count any *dots*. You can think of it as default `ls`
+- `dots=separate` *(default)*: counts dots into a separate category (shown in the example), marked grey
+- `dots=counted`: counts dots just like any other items. Think of it as `ls --all`
 
 ## Example configurations
 

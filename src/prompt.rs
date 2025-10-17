@@ -5,6 +5,7 @@ use crate::colors::get_config::get_formatter;
 use crate::path_display;
 use crate::jobs;
 use crate::non_default_shell::non_default_shell_component;
+use crate::ls::ls_component;
 
 #[derive(clap::Parser, Debug)]
 /// Generate shell prompt
@@ -26,7 +27,7 @@ pub fn prompt(args: Prompt) {
     let git_status = git::show::show_git_status(&args.escformat);
     let formatter = get_formatter(&args.escformat);
     print!(
-        "{}{}{} {}{}",
+        "{}{}{} {}{}{}",
         non_default_shell_component(&args.escformat),
         if &args.exit_code == "0" { "".to_string() } else { exit_codes::format_code(&args.escformat, &args.exit_code) },
         format!("{}{}", args.escformat.esc("1m"), formatter.format_str(
@@ -34,5 +35,6 @@ pub fn prompt(args: Prompt) {
         )),
         jobs::show_jobs(&args.escformat, &args.jobs_number),
         git_status,
+        ls_component(&args.escformat, &cwd),
     );
 }
