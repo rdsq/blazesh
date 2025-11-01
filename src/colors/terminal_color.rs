@@ -1,21 +1,22 @@
-use super::rgb::RGB;
+use rgb::RGB8;
 use super::escseq::EscSeqFormat;
+use super::misc::{try_parse_hex, to_ansi_foreground};
 
 #[derive(PartialEq)]
 pub enum TerminalColor {
     Ansi(char),
-    Rgb(RGB),
+    Rgb(RGB8),
 }
 
 impl TerminalColor {
     pub fn to_ansi_foreground(&self, escformat: &EscSeqFormat) -> String {
         return match self {
             Self::Ansi(c) => escformat.esc(&format!("3{}m", c)),
-            Self::Rgb(rgb) => escformat.wrap(&rgb.to_ansi_foreground()),
+            Self::Rgb(rgb) => escformat.wrap(&to_ansi_foreground(&rgb)),
         };
     }
     pub fn try_parse(chunk: &str) -> Option<Self> {
-        if let Some(parsed_rgb) = RGB::try_parse(&chunk) {
+        if let Some(parsed_rgb) = try_parse_hex(&chunk) {
             return Some(Self::Rgb(parsed_rgb));
         }
         if chunk.len() == 1 {

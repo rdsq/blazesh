@@ -1,10 +1,13 @@
-use crate::colors::escseq::EscSeqFormat;
-use crate::colors::formatters::formatter_trait::Formatter;
-use crate::colors::rgb::RGB;
-use crate::colors::gradient::gradient;
+use crate::colors::{
+    escseq::EscSeqFormat,
+    formatters::formatter_trait::Formatter,
+    gradient::gradient,
+    misc::{to_ansi_foreground, try_parse_hex},
+};
+use rgb::RGB8;
 
 pub struct GradientFormatter<'a> {
-    pub colors: Vec<RGB>,
+    pub colors: Vec<RGB8>,
     pub interval: Option<f32>,
     pub escformat: &'a EscSeqFormat,
 }
@@ -14,7 +17,7 @@ impl <'a>Formatter<'a> for GradientFormatter<'a> {
         if text.len() == 1 {
             return format!(
                 "{}{}{}",
-                self.escformat.wrap(&self.colors[0].to_ansi_foreground()),
+                self.escformat.wrap(&to_ansi_foreground(&self.colors[0])),
                 text,
                 self.escformat.esc("0m"),
             );
@@ -25,11 +28,11 @@ impl <'a>Formatter<'a> for GradientFormatter<'a> {
             let interval = self.interval.unwrap_or(text.len() as f32);
             let t = (i as f32 / (interval - 1.0)) * (self.colors.len() - 1) as f32;
             let color = gradient(&self.colors, t);
-            let color_id_i_guess = color.to_ansi256();
-            if prev != Some(color_id_i_guess) {
+            let color_id_i_guess = color.clone();
+            if prev.as_ref() != Some(&color_id_i_guess) {
                 // optimization
                 result.push_str(
-                    &self.escformat.wrap(&color.to_ansi_foreground())
+                    &self.escformat.wrap(&to_ansi_foreground(&color))
                 );
                 prev = Some(color_id_i_guess);
             }
@@ -55,7 +58,7 @@ impl <'a>GradientFormatter<'a> {
                     }
                 }
             }
-            if let Some(color) = RGB::try_parse(i) {
+            if let Some(color) = try_parse_hex(i) {
                 colors.push(color);
             }
         }
