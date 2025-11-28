@@ -193,6 +193,20 @@ color2="#${random_hex:6:6}"
 export BLAZESH_ACCENT_COLOR="gradient $color1 $color2"
 ```
 
+### Color of your distro
+
+This will make your prompt the color the developers of your operating system decided (does literally anything use this value?)
+
+```sh
+# I don't know how to use sed please don't get mad
+distro_color="$(cat /etc/os-release | grep 'ANSI_COLOR=' \
+    | sed 's/ANSI_COLOR="38;2;//' | sed 's/"//' | sed 's/;/,/g')"
+
+if [[ -n "$distro_color" ]]; then
+    export BLAZESH_ACCENT_COLOR="$distro_color"
+fi
+```
+
 And you can do that with so much more, like days of the week, hours, whatever you wish!
 
 ## Problems
