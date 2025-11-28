@@ -1,6 +1,6 @@
 use rgb::RGB8;
 use super::escseq::EscSeqFormat;
-use super::misc::{try_parse_hex, to_ansi_foreground};
+use super::misc::{try_parse_col, to_ansi_foreground};
 
 #[derive(PartialEq)]
 pub enum TerminalColor {
@@ -16,7 +16,7 @@ impl TerminalColor {
         };
     }
     pub fn try_parse(chunk: &str) -> Option<Self> {
-        if let Some(parsed_rgb) = try_parse_hex(&chunk) {
+        if let Some(parsed_rgb) = try_parse_col(&chunk) {
             return Some(Self::Rgb(parsed_rgb));
         }
         if chunk.len() == 1 {

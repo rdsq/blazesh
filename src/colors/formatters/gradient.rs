@@ -2,7 +2,7 @@ use crate::colors::{
     escseq::EscSeqFormat,
     formatters::formatter_trait::Formatter,
     gradient::gradient,
-    misc::{to_ansi_foreground, try_parse_hex},
+    misc::{to_ansi_foreground, try_parse_col},
 };
 use rgb::RGB8;
 
@@ -58,7 +58,7 @@ impl <'a>GradientFormatter<'a> {
                     }
                 }
             }
-            if let Some(color) = try_parse_hex(i) {
+            if let Some(color) = try_parse_col(i) {
                 colors.push(color);
             }
         }
