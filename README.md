@@ -4,8 +4,6 @@ It is a shy shell prompt theme made in Rust. Shy means that it leaves nothing in
 
 ![Blazesh demo](./media/demo.jpg)
 
-It was created to be minimal, compact, beautiful, smart (compared to a potato), and just a fun experiment
-
 ## Why
 
 1. As a fun thing
@@ -24,7 +22,7 @@ You can install it using:
 cargo install --git https://github.com/rdsq/blazesh
 ```
 
-And then add one of these to your shell config file:
+And then add one of these to your shell config file (just don't forget to add `~/.cargo/bin` to `PATH`):
 
 ### Bash `~/.bashrc`
 
@@ -67,7 +65,7 @@ You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environm
 - `unoptimized` - check git status every time, even if it is not a git repository
 - `optimized` (default) - check git status only if the current directory or one of its parents is a git repository. **Best for functionality**
 - `optimized-cwd` - like `optimized`, but checks only the current directory, doesn't check its parents
-- `static` - just show `[git]` if the current directory or one of its parents is a git repository. Does not check any status or anything. **Best for performance balance**
+- `static` - just show `[git]` if the current directory or one of its parents is a git repository. Does not check any status or anything. **Best for performance**
 - `static-cwd` - like `static`, but checks only the current directory
 - `disabled` - completely disable git integration
 
@@ -88,7 +86,7 @@ RGB values can be written either as hexadecimal (e.g. `FF9900`) or as decimal (e
 
 **But** it also has the second mode: **gradient**
 
-You can set a gradient between any two RGB values by following the `gradient [color1] [color2] ... [color_n]` syntax
+You can set a gradient between any two or more RGB values by following the `gradient [color1] [color2] ... [color_n]` syntax
 
 For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 0057B7 FFD700` to see the gradient between the official 🇺🇦 colors
 
@@ -124,6 +122,8 @@ You can change how exit codes will be shown in the prompt by editing `BLAZESH_EX
 - `code`: just the code, no message, if you like it serious. Example: `[130]`
 - `message`: just show the message if available, good for being compact. Example: `[SIGINT]`
 - `both` *(default)*: show both the code and the message. Example: `[130/SIGINT]`
+
+*(does not work in Bash for whatever reason)*
 
 ### Path shorthands
 
@@ -208,13 +208,3 @@ fi
 ```
 
 And you can do that with so much more, like days of the week, hours, whatever you wish!
-
-## Problems
-
-The most obvious one: **synchronous git**. Unfortunately I am not smart enough to figure out how to do that asynchronously, so... Well it's not *that* bad. Even on my 🥔 it runs fast enough to be usable daily. But I mean it's still better than nothing. Fish, for example, does it synchronously too, but with less features. At least here it can be disabled or customized
-
-Not so critical one, but also worth mentioning: **exit codes** don't show up in **Bash**. As far as I can tell, this issue cannot be fixed, it's just how Bash works
-
-## Fish shell
-
-Yeah it also supports Fish, I don't know why I did this, but it was easy. I am too lazy to rewrite all the documentation, *if you count it as such*, to include Fish, since it is kind of different from other shells, just figure it out on your own. The file is `blazesh.fish`. Just source it in your `~/.config/fish/config.fish` or, again, wherever you store your configs
