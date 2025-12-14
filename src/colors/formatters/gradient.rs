@@ -9,6 +9,7 @@ use rgb::RGB8;
 pub struct GradientFormatter<'a> {
     pub colors: Vec<RGB8>,
     pub interval: Option<f32>,
+    pub offset: f64,
     pub escformat: &'a EscSeqFormat,
 }
 
@@ -24,9 +25,10 @@ impl <'a>Formatter<'a> for GradientFormatter<'a> {
         }
         let mut result = String::new();
         let mut prev = None;
+        let offset = self.offset % text.len() as f64;
         for (i, ch) in text.chars().enumerate() {
             let interval = self.interval.unwrap_or(text.len() as f32);
-            let t = (i as f32 / (interval - 1.0)) * (self.colors.len() - 1) as f32;
+            let t = ((i as f32 + offset as f32) / (interval - 1.0)) * (self.colors.len() - 1) as f32;
             let color = gradient(&self.colors, t);
             let color_id_i_guess = color.clone();
             if prev.as_ref() != Some(&color_id_i_guess) {
@@ -49,11 +51,18 @@ impl <'a>GradientFormatter<'a> {
         sp.next(); // skip `gradient` keyword
         let mut interval = None;
         let mut colors = Vec::new();
+        let mut offset = 0.0;
         for i in sp {
-            if let Some((kw, interval_inp)) = i.split_once('=') {
+            if let Some((kw, value_inp)) = i.split_once('=') {
                 if kw == "interval" {
-                    if let Ok(interval_val) = interval_inp.parse::<f32>() {
+                    if let Ok(interval_val) = value_inp.parse::<f32>() {
                         interval = Some(interval_val);
+                        continue;
+                    }
+                }
+                if kw == "offset" {
+                    if let Ok(offset_val) = value_inp.parse::<f64>() {
+                        offset = offset_val;
                         continue;
                     }
                 }
@@ -65,6 +74,6 @@ impl <'a>GradientFormatter<'a> {
         if colors.len() < 2 {
             return None;
         }
-        Some(Self { colors, interval, escformat })
+        Some(Self { colors, interval, escformat, offset })
     }
 }

@@ -25,6 +25,7 @@ pub fn get_formatter<'a>(escformat: &'a EscSeqFormat) -> Box<dyn formatter_trait
             RGB8 { r: 255, g: 255, b: 0 }, // FFFF00
         ],
         interval: Some(10.0),
+        offset: 0.0,
         escformat,
     })
 }

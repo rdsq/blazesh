@@ -73,6 +73,8 @@ You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environm
 
 ### Colors
 
+(probably the main feature of this project)
+
 You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR`. You can set it to any number 0-7 and 9 representing the ANSI color codes, and also any RGB value. You can also set it to a sequence of colors, and it will show them as repeating colors. **Examples:**
 
 - `5` - magenta
@@ -100,6 +102,15 @@ export BLAZESH_ACCENT_COLOR="gradient FF0000 00FF00 0000FF interval=10"
 ```
 
 And the default color is a looping gradient too! It is `gradient FF9900 FFFF00 interval=10`
+
+And you can define gradient offset. This one is not as visible, but it allows you to add a little dynamic time based glow to it for example
+
+```sh
+function _blazesh_time_offset {
+    export BLAZESH_ACCENT_COLOR="gradient ff9900 ffff00 interval=10 offset=$(date +%s)"
+}
+precmd_functions+=(_blazesh_time_offset)
+```
 
 ### Path
 
