@@ -1,6 +1,6 @@
 ![Blazesh](./media/blazesh.jpg)
 
-It is a shy shell prompt theme made in Rust. Shy means that it leaves nothing in you environment. No `.config`, no variables. Well, except polluting the env variables... Didn't think it through
+It is a shell prompt made in Rust. Minimalist, dynamically configurable, a little opinionated
 
 ![Blazesh demo](./media/demo.jpg)
 
@@ -9,10 +9,10 @@ It is a shy shell prompt theme made in Rust. Shy means that it leaves nothing in
 1. As a fun thing
 2. I was bored
 3. Eye candy
-4. Make using the command line more comfortable
-5. Main reason is, though, using [Starship](https://github.com/starship/starship) is for normies. **Real nerds** write their own shell prompts
+4. It is visually distinct from black and white terminal text, so easier to use
+5. Main reason is, though, using [Starship](https://github.com/starship/starship) is for normies. **Real nerds** write their own shell prompts. It's not that hard really. Then I guess I could've kept this repo private, but whatever
 
-And I called it **Blazesh** in reference to the meme, not like it was created to be brazingly fast
+And I called it **Blazesh** in reference to the meme, not like it was created to be brazingly fast. If you want something really fast, `unset precmd_functions`
 
 ## Installation
 
@@ -84,7 +84,7 @@ You can set the color of the path in the prompt by editing `BLAZESH_ACCENT_COLOR
 - `0 1 2 3 4 5 6 7` - full ANSI rainbow
 - `FF0000 FF7F00 FFFF00 00FF00 00FFFF 0000FF 8B00FF` - actual rainbow 🌈
 
-RGB values can be written either as hexadecimal (e.g. `FF9900`) or as decimal (e.g. `255,153,0`)
+RGB values can be written either as hexadecimal (`FF9900`) or as decimal (`255,153,0`)
 
 **But** it also has the second mode: **gradient**
 
@@ -94,7 +94,7 @@ For example, set the `BLAZESH_ACCENT_COLOR` environment variable to `gradient 00
 
 ![Really long path showing a gradient from blue to yellow](./media/gradient.jpg)
 
-You can even define gradient looping! This means that app the colors will repeat after certain number of characters
+You can even define gradient looping! This means that the colors will repeat after certain number of characters
 
 ```sh
 # For RGB
@@ -157,10 +157,10 @@ This one was made to feel more comfortable using the command line, it shows the 
 
 You can enable it by setting `BLAZESH_LS=enabled`. You can also configure the dots mode. (dots referring to all items starting with `.`, e.g. `.git`, `.zshrc`)
 
-You can change your preferred dots mode with:
+You can change your preferred dots mode with `BLAZESH_LS` value:
 
 - `dots=ignored`: does not count any *dots*. You can think of it as default `ls`
-- `dots=separate` *(default)*: counts dots into a separate category (shown in the example), marked grey
+- `dots=separate` *(default)*: counts dots into a separate category (shown in the example), marked grey. Closest mental model would be `echo * .*`
 - `dots=counted`: counts dots just like any other items. Think of it as `ls --all`
 
 ## Example configurations
@@ -213,7 +213,7 @@ This will make your prompt the color the developers of your operating system dec
 distro_color="$(cat /etc/os-release | grep 'ANSI_COLOR=' \
     | sed 's/ANSI_COLOR="38;2;//' | sed 's/"//' | sed 's/;/,/g')"
 
-if [[ -n "$distro_color" ]]; then
+if [ -n "$distro_color" ]; then
     export BLAZESH_ACCENT_COLOR="$distro_color"
 fi
 ```
