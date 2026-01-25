@@ -48,6 +48,12 @@ eval "$(blazesh setup detect)"
 source (blazesh setup fish | psub)
 ```
 
+### Tcsh `~/.tcshrc` / `~/.cshrc`
+
+```csh
+eval "`blazesh setup csh`"
+```
+
 ## Features & Configuration
 
 Here is how you can configure Blazesh with environment variables:

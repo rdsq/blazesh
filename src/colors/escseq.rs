@@ -3,13 +3,14 @@ pub enum EscSeqFormat {
     Bash,
     Zsh,
     Fish,
+    Csh,
 }
 
 impl EscSeqFormat {
     pub fn wrap(&self, seq: &str) -> String {
         match self {
             Self::Bash => format!("\\[{}\\]", seq),
-            Self::Zsh => format!("%{{{}%}}", seq),
+            Self::Zsh | Self::Csh => format!("%{{{}%}}", seq),
             Self::Fish => seq.to_owned(),
         }
     }
@@ -29,6 +30,7 @@ impl EscSeqFormat {
             Self::Bash => "bash",
             Self::Zsh => "zsh",
             Self::Fish => "fish",
+            Self::Csh => "csh",
         }
     }
 }

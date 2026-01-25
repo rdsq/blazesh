@@ -4,6 +4,7 @@ enum Shell {
     Zsh,
     Detect,
     Fish,
+    Csh,
 }
 
 #[derive(clap::Parser, Debug)]
@@ -25,5 +26,6 @@ pub fn setup(args: Setup) {
         },
         Shell::Detect => print!("{}", include_str!("./snippets/detect.sh")),
         Shell::Fish => print!("{}", include_str!("./snippets/fish.fish")),
+        Shell::Csh => print!("{}", include_str!("./snippets/csh.csh"))
     };
 }
