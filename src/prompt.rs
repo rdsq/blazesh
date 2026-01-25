@@ -22,7 +22,8 @@ pub fn prompt(args: Prompt) {
     // Get current working directory
     let cwd = std::env::current_dir()
         .map(|path| path.display().to_string())
-        .unwrap_or_else(|_| "unknown".to_string());
+        .or_else(|_| std::env::var("PWD")) // backup option
+        .unwrap_or_else(|_| "<unknown>".to_string());
 
     let git_status = git::show::show_git_status(&args.escformat);
     let formatter = get_formatter(&args.escformat);
