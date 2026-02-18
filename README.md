@@ -19,6 +19,9 @@ And I called it **Blazesh** in reference to the meme, not like it was created to
 You can install it using:
 
 ```sh
+# From Codeberg
+cargo install --git https://codeberg.org/rdsq/blazesh
+# Or from GitHub
 cargo install --git https://github.com/rdsq/blazesh
 ```
 
