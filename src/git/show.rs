@@ -1,10 +1,16 @@
 use super::status::git_status;
 use super::modes::decide::{decide, Decision};
+use super::verbosity::GitVerbosityConfig;
 use crate::colors::escseq::EscSeqFormat;
 
-fn construct_one_icon(escformat: &EscSeqFormat, symbol: &str, condition: &bool) -> String {
-    if *condition {
-        escformat.color("32;1", symbol)
+fn construct_one_icon(escformat: &EscSeqFormat, symbol: &str, num: u16, verbose: bool) -> String {
+    if num != 0 {
+        let content = if verbose && num != 1 {
+            &format!("{}{}", symbol, num)
+        } else {
+            symbol
+        };
+        escformat.color("32;1", content)
     } else {
         escformat.color("2;1", symbol)
     }
@@ -16,14 +22,14 @@ fn static_git_status(escformat: &EscSeqFormat) -> String {
 
 pub fn get_updated_git_status(escformat: &EscSeqFormat) -> String {
     if let Some(status) = git_status() {
-        let any_status = status.uncommitted || status.upstream || status.downstream;
-        if any_status {
+        if status.anything_going_on() {
+            let verbosity = GitVerbosityConfig::detect();
             format!(
                 "{}{}{}{}{} ",
                 escformat.color("34;1", "["),
-                construct_one_icon(&escformat, "+", &status.uncommitted),
-                construct_one_icon(&escformat, "↑", &status.upstream),
-                construct_one_icon(&escformat, "↓", &status.downstream),
+                construct_one_icon(&escformat, "+", status.uncommitted, verbosity.show_uncommitted()),
+                construct_one_icon(&escformat, "↑", status.upstream, verbosity.show_remotes()),
+                construct_one_icon(&escformat, "↓", status.downstream, verbosity.show_remotes()),
                 escformat.color("34;1", "]"),
             )
         } else {

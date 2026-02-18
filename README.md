@@ -66,6 +66,8 @@ It shows a git panel, yes it kind of takes time to load, but it is helpful
 - `↑` represents unpushed changes
 - `↓` represents unpulled changes
 
+#### Mode
+
 You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environment variable. **Possible values:**
 
 - `unoptimized` - check git status every time, even if it is not a git repository
@@ -76,6 +78,16 @@ You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environm
 - `disabled` - completely disable git integration
 
 *And yes, you can use non 🦅🦅🦅🦅🦅🦅 spelling*
+
+#### Verbosity
+
+You can configure whether to show the exact number of changes alongside the icons. So in case of remotes it will be the number of commits pending, and in case of uncommitted changes it will be the number of changes
+
+You can play with this setting by modifying the `BLAZESH_GIT_VERBOSITY` variable:
+
+- `minimal` is the default. It does not show any numbers, only icons
+- `remotes` only shows the number of commits not pushed/pulled
+- `all` shows the remotes + uncommitted changes
 
 ### Colors
 
