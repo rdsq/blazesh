@@ -6,7 +6,7 @@ use crate::colors::escseq::EscSeqFormat;
 fn construct_one_icon(escformat: &EscSeqFormat, symbol: &str, num: u16, verbose: bool) -> String {
     if num != 0 {
         let content = if verbose && num != 1 {
-            &format!("{}{}", symbol, num)
+            &format!("{}{}{}", symbol, escformat.esc("2m"), num)
         } else {
             symbol
         };
