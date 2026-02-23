@@ -2,8 +2,6 @@
 
 It is a shell prompt made in Rust. Minimalist, dynamically configurable, a little opinionated
 
-![Blazesh demo](./media/demo.jpg)
-
 ## Why
 
 1. As a fun thing
@@ -63,6 +61,8 @@ Here is how you can configure Blazesh with environment variables:
 
 ### Git
 
+![Git demo in Fish shell, showing file addition and git reset](./media/git.png)
+
 It shows a git panel, yes it kind of takes time to load, but it is helpful
 
 - `+` represents the uncommitted changes
@@ -80,7 +80,7 @@ You can configure how it handles git by changing the `BLAZESH_GIT_MODE` environm
 - `static-cwd` - like `static`, but checks only the current directory
 - `disabled` - completely disable git integration
 
-*And yes, you can use non 🦅🦅🦅🦅🦅🦅 spelling*
+*you can use non 🦅🦅🦅🦅🦅🦅 spelling*
 
 #### Verbosity
 
@@ -147,7 +147,9 @@ Use `BLAZESH_PATH_DEPTH` to edit how many directories to show before replacing t
 - `1` - `…/src`
 - `2` *(and higher)* - `~/blazesh/src`
 
-### Exit codes format
+### Exit codes
+
+![A demo showing how Blazesh shows exit codes](./media/exit-codes.png)
 
 You can change how exit codes will be shown in the prompt by editing `BLAZESH_EXIT_CODE_FORMAT`. Possible values:
 
@@ -168,11 +170,15 @@ For example, `$HOME:~;/root:r~` would show paths as:
 
 ### Non-default shell
 
+![Demo showing how Blazesh adds `(zsh)` or `(bash)` when these are not default shells](./media/non-default-shell.png)
+
 This prompt can also show that you're using a shell that is different from the default one set with `chsh`
 
 If you want to disable this, set `BLAZESH_NON_DEFAULT_SHELL` to `disabled`
 
 ### ls
+
+![A demo showing how ls feature works in Fish shell](./media/ls.png)
 
 This one was made to feel more comfortable using the command line, it shows the contents of your current directory as `(DIRS FILES DOTS)` *(disabled by default)*
 
@@ -187,8 +193,6 @@ You can change your preferred dots mode with `BLAZESH_LS` value:
 ## Example configurations
 
 ### Insanity
-
-*You have the freedom to make your command prompt look insane if you are*
 
 ![Command prompt showing path of ~/mydir/another/one/so/many/dirs/im/insane/i/mean/imnot/im/just/showingwhat/aninsaneperson/woulddo in full and repeating ANSI rainbow](./media/insanity.jpg)
 
@@ -240,3 +244,15 @@ fi
 ```
 
 And you can do that with so much more, like days of the week, hours, whatever you wish!
+
+## Feature compatibility
+
+Maybe I'm just lazy and don't want to dig deep enough
+
+| Feature    | Zsh  | Bash | Fish | Tcsh   |
+| ---        | ---  | ---  | ---  | ---    |
+| Jobs       | ✅\* | ❌   | ✅   | ❌     |
+| Exit codes | ✅   | ❌   | ✅   | ✅\*\* |
+
+- \* If have, for example, 2 jobs like `sleep 1 & sleep 10 &` and the first one exits, all the others will stop showing up too for whatever reason
+- \*\* Only shows `[1]`
